@@ -1,0 +1,33 @@
+{
+  "name": "team-4-project-2-be",
+  "version": "1.0.0",
+  "description": "Matts here",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RevatureRobert/team-4-Project-2-BE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RevatureRobert/team-4-Project-2-BE/issues"
+  },
+  "homepage": "https://github.com/RevatureRobert/team-4-Project-2-BE#readme",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.22.0",
+    "@aws-sdk/lib-dynamodb": "^3.22.0",
+    "@types/node": "^16.3.3",
+    "typecript": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
+    "babel-jest": "^27.0.6",
+    "jest": "^27.0.6",
+    "jest-dynalite": "^3.4.1"
+  }
+}
