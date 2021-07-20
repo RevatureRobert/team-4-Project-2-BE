@@ -1,0 +1,28 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      # Only first build for each image
+      - aws ecr create-repository --repository-name PostGetOne --image-scanning-configuration scanOnPush=true --region us-east-2
+      - aws ecr create-repository --repository-name PostAddOne --image-scanning-configuration scanOnPush=true --region us-east-2
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      # Build PostGetOne
+      - docker build ./ -t PostGetOne:$IMAGE_TAG -f Docker/Posts/GetOne/Dockerfile
+      - docker tag PostGetOne:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/PostGetOne:$IMAGE_TAG
+      # Build PostAddOne
+      - docker build ./ -t PostAddOne:$IMAGE_TAG -f Docker/Posts/AddOne/Dockerfile
+      - docker tag PostGetOne:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/PostAddOne:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      # Push PostGetOne
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/PostGetOne:$IMAGE_TAG
+      # Push PostAddOne
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/PostAddOne:$IMAGE_TAG

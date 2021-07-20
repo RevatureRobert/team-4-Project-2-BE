@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "CommonJS",
+        "outDir": "build",
+        "strict": false,
+        "baseUrl": "./",
+        "esModuleInterop": true,
+
+    },
+    "include": [
+        "Lamdas/**/*.ts",
+        "DB/*.ts"
+    ]
+}
