@@ -4,12 +4,14 @@ RUN mkdir /app
 
 WORKDIR /app
 
-COPY build/Lamdas/Posts/GetOne /Post/
-COPY package.json /Post/
-COPY build/DB /Post/
-
-WORKDIR /Post
-
+COPY package.json ./
 RUN npm install
+
+COPY build/Lamdas/Posts/GetOne ./
+
+COPY build/DB ./
+
+# WORKDIR /Post
+
 
 CMD [PostGetOne.handler]

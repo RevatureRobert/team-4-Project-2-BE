@@ -4,11 +4,16 @@ RUN mkdir /app
 
 WORKDIR /app
 
-COPY build/Lamdas/Posts/AddOne /Post/
-COPY package.json /Post/
-COPY build/DB /Post/
+COPY package.json ./
+RUN npm install
 
-WORKDIR /Post
+COPY build/Lamdas/Posts/AddOne ./
+
+COPY build/DB ./
+
+
+
+# WORKDIR /Post
 
 RUN npm install
 

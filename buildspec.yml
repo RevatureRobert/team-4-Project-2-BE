@@ -1,0 +1,35 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      # install docker compose
+      - curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+      - chmod +x /usr/local/bin/docker-compose
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      # install dependacies
+      - npm install
+      # Only first build for each image
+      # aws ecr create-repository --repository-name post-get-one --image-scanning-configuration scanOnPush=true --region us-east-2
+      # aws ecr create-repository --repository-name post-add-one --image-scanning-configuration scanOnPush=true --region us-east-2
+  build:
+    commands:
+      - echo Build started on `date`
+      # transpile typescript
+      - echo transpiling typescript
+      - npm run build
+      - echo Building the Docker image...
+      # Build post-get-one
+      - docker-compose create
+      - docker tag post-get-one:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/post-get-one:$IMAGE_TAG
+      # Build post-add-one
+      - docker tag post-add-one:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/post-add-one:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      # Push post-get-one
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/post-get-one:$IMAGE_TAG
+      # Push post-add-one
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/post-add-one:$IMAGE_TAG
