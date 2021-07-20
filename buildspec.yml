@@ -24,7 +24,7 @@ phases:
       - docker-compose create
       - docker tag post-get-one:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/post-get-one:$IMAGE_TAG
       # Build post-add-one
-      - docker tag post-get-one:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/post-add-one:$IMAGE_TAG
+      - docker tag post-add-one:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/post-add-one:$IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
