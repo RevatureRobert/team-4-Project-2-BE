@@ -3,6 +3,9 @@ version: 0.2
 phases:
   pre_build:
     commands:
+      # install docker compose
+      - curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+      - chmod +x /usr/local/bin/docker-compose
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
       # Only first build for each image
@@ -13,10 +16,9 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       # Build post-get-one
-      - docker build -t post-get-one:$IMAGE_TAG -f Docker/Posts/GetOne/Dockerfile
+      - docker-compose create
       - docker tag post-get-one:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/post-get-one:$IMAGE_TAG
       # Build post-add-one
-      - docker build -t post-add-one:$IMAGE_TAG -f Docker/Posts/AddOne/Dockerfile
       - docker tag post-get-one:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/post-add-one:$IMAGE_TAG
   post_build:
     commands:
