@@ -4,8 +4,11 @@ RUN mkdir /app
 
 WORKDIR /app
 
-COPY build/Lamdas/Posts/GetOne /Post/
 COPY package.json /Post/
+RUN npm run build
+
+COPY build/Lamdas/Posts/GetOne /Post/
+
 COPY build/DB /Post/
 
 WORKDIR /Post
