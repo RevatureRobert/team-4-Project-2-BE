@@ -1,4 +1,4 @@
-import { DeleteCommand } from "@aws-sdk/lib-dynamodb";
+import { DeleteItemCommand } from "@aws-sdk/client-dynamodb";
 import { ddbDoc } from "../../../DB/Dynamo";
 
 const dynamoDBTableName = "ScouterApp";
@@ -7,21 +7,18 @@ exports.handler = async (event: any) => {
   console.log("Request event: ", event);
   let response = {};
 
-  let body = JSON.parse(event.body);  
-  let parentId = body.parentID;
-  
-
+  let body = JSON.parse(event.body);
   let params = {
     TableName: dynamoDBTableName,
-    Item: {
-      TYPEID: parentId,
+    Key: {
+      KEY_NAME: { S: "TYPEID" },
      
     },
   };
 
   try {
-    await ddbDoc.send(new DeleteCommand(params));
-    response = buildResponse(200, "Success");
+    const data = await ddbDoc.send(new DeleteItemCommand(params));
+    response = buildResponse(200, data);
   } catch (err) {
     response = buildResponse(400, "error with command");
     console.log(err);
