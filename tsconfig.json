@@ -11,5 +11,8 @@
     "include": [
         "Lamdas/**/*.ts",
         "DB/*.ts"
+    ],
+    "exclude": [
+        "Lamdas/**/*.test.ts"
     ]
 }
