@@ -1,4 +1,4 @@
-import {ddbDoc} from './src/daos/DB/Dynamo'
+import { ddbDoc } from './DB/Dynamo'
 
 afterAll(() => {
     ddbDoc.destroy();

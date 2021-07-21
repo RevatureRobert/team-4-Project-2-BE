@@ -1,33 +1,24 @@
-import { PutCommand } from "@aws-sdk/lib-dynamodb";
+import { ScanCommand } from "@aws-sdk/lib-dynamodb";
 import { ddbDoc } from "../../../DB/Dynamo";
 
 const dynamoDBTableName = "ScouterApp";
 
-export const handler = async (event: any) => {
+exports.handler = async (event: any) => {
   console.log("Request event: ", event);
   let response = {};
 
   let body = JSON.parse(event.body);
-  let postId = body.postID;
-  let parentId = body.parentID;
-  let timestamp = body.timestamp;
-  let content = body.content;
-  let image = body.image;
+
+  let pageId = body.pageID;
 
   let params = {
     TableName: dynamoDBTableName,
-    Item: {
-      TYPEID: parentId,
-      REFERENCE: postId,
-      timestamp,
-      content,
-      image,
-    },
+    FilterExpression: `TYPEID = ${pageId} AND NOT REFERENCE = 0`,
   };
-  console.log("params", params);
+
   try {
-    await ddbDoc.send(new PutCommand(params));
-    response = buildResponse(200, "Success");
+    let data = await ddbDoc.send(new ScanCommand(params));
+    response = buildResponse(200, data.Items);
   } catch (err) {
     response = buildResponse(400, "error with command");
     console.log(err);

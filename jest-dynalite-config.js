@@ -1,7 +1,7 @@
 module.exports = {
     tables: [
       {
-        TableName: "Scouter",
+        TableName: "ScouterApp",
         KeySchema: [
           { AttributeName: "TYPEID", 
           KeyType: "HASH" 
