@@ -1,4 +1,4 @@
-import { GetCommand } from "@aws-sdk/lib-dynamodb";
+import { DeleteCommand } from "@aws-sdk/lib-dynamodb";
 import { ddbDoc } from "../../../DB/Dynamo";
 
 const dynamoDBTableName = "ScouterApp";
@@ -20,8 +20,8 @@ exports.handler = async (event: any) => {
   };
 
   try {
-    let data = await ddbDoc.send(new GetCommand(params));
-    response = buildResponse(200, data.Item);
+    await ddbDoc.send(new DeleteCommand(params));
+    response = buildResponse(200, "Seccess");
   } catch (err) {
     response = buildResponse(400, "error with command");
     console.log(err);

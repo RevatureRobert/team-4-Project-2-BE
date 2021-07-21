@@ -1,4 +1,4 @@
-import { GetCommand } from "@aws-sdk/lib-dynamodb";
+import { ScanCommand } from "@aws-sdk/lib-dynamodb";
 import { ddbDoc } from "../../../DB/Dynamo";
 
 const dynamoDBTableName = "ScouterApp";
@@ -8,20 +8,25 @@ exports.handler = async (event: any) => {
   let response = {};
 
   let body = JSON.parse(event.body);
-  let postId = body.postID;
-  let parentId = body.parentID;
+
+  let filterString: string = "";
+
+  let postIds: any[] = body.followArray;
+
+  postIds.forEach((user) => {
+    filterString += `contains(REFERENCE, ${user}) OR `;
+  });
+
+  filterString = filterString.substring(0, filterString.length - 4);
 
   let params = {
     TableName: dynamoDBTableName,
-    Key: {
-      TYPEID: parentId,
-      REFERENCE: postId,
-    },
+    FilterExpression: filterString,
   };
 
   try {
-    let data = await ddbDoc.send(new GetCommand(params));
-    response = buildResponse(200, data.Item);
+    let data = await ddbDoc.send(new ScanCommand(params));
+    response = buildResponse(200, data.Items);
   } catch (err) {
     response = buildResponse(400, "error with command");
     console.log(err);
