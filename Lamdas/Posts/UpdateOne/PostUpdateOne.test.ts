@@ -1,7 +1,8 @@
 import { handler as addHandler } from "../AddOne/PostAddOne";
-import { handler as getHandler } from "./PostGetOne";
+import { handler as updateHandler } from "./PostUpdateOne";
+import { handler as getHandler } from "../GetOne/PostGetOne";
 
-describe("GetOne", () => {
+describe("updateOne", () => {
   beforeEach(async () => {
     let body = {
       postID: `user1#10`,
@@ -15,6 +16,13 @@ describe("GetOne", () => {
     await addHandler({ body: addRequest });
   });
   test("Should return status 200", async () => {
+    let updateBody = {
+      postID: `user1#10`,
+      parentID: `A#DragonBall`,
+      Stamp: 25,
+      content: `This is not the post`,
+      image: `no image`,
+    };
     let getBody = {
       postID: `user1#10`,
       parentID: `A#DragonBall`,
@@ -23,28 +31,26 @@ describe("GetOne", () => {
       REFERENCE: `user1#10`,
       TYPEID: `A#DragonBall`,
       Stamp: 25,
-      content: `This is the post`,
+      content: `This is not the post`,
       image: `no image`,
     };
+    let request = JSON.stringify(updateBody);
+    //Update entry
+    let response: any = await updateHandler({ body: request });
+    //Retrieve entry
     let getRequest = JSON.stringify(getBody);
-
     let getResponse: any = await getHandler({ body: getRequest });
-
-    expect(getResponse.statusCode).toBe(200);
-    console.log("Get Response", getResponse);
+    expect(response.statusCode).toBe(200);
     expect(JSON.parse(getResponse.body)).toStrictEqual(expectBody);
   });
 
   test("should return a status 400", async () => {
-    let getBody = {
-      postID: undefined,
-      parentID: `A#DragonBall`,
-    };
+    let updateBody = {};
 
-    let getRequest = JSON.stringify(getBody);
+    let request = JSON.stringify(updateBody);
 
-    let getResponse: any = await getHandler({ body: getRequest });
+    let response: any = await updateHandler({ body: request });
 
-    expect(getResponse.statusCode).toBe(400);
+    expect(response.statusCode).toBe(400);
   });
 });

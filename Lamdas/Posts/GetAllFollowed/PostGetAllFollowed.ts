@@ -3,7 +3,7 @@ import { ddbDoc } from "../../../DB/Dynamo";
 
 const dynamoDBTableName = "ScouterApp";
 
-exports.handler = async (event: any) => {
+export const handler = async (event: any) => {
   console.log("Request event: ", event);
   let response = {};
 
@@ -12,9 +12,10 @@ exports.handler = async (event: any) => {
   let filterString: string = "";
 
   let postIds: any[] = body.followArray;
-
+  let expressionValue: Object = {};
   postIds.forEach((user) => {
-    filterString += `contains(REFERENCE, ${user}) OR `;
+    filterString += `contains(#ref, :${user}) OR `;
+    expressionValue[`:${user}`] = user;
   });
 
   filterString = filterString.substring(0, filterString.length - 4);
@@ -22,11 +23,23 @@ exports.handler = async (event: any) => {
   let params = {
     TableName: dynamoDBTableName,
     FilterExpression: filterString,
+    ExpressionAttributeNames: {
+      "#ref": "REFERENCE",
+    },
+    ExpressionAttributeValues: expressionValue,
   };
-
+  console.log("Params", params);
   try {
     let data = await ddbDoc.send(new ScanCommand(params));
-    response = buildResponse(200, data.Items);
+    let sortFn = (a, b) => {
+      if (a.Stamp > b.Stamp) {
+        return -1;
+      } else {
+        return 1;
+      }
+    };
+    let sorted = [...data.Items].sort(sortFn);
+    response = buildResponse(200, sorted);
   } catch (err) {
     response = buildResponse(400, "error with command");
     console.log(err);

@@ -10,7 +10,7 @@ export const handler = async (event: any) => {
   let body = JSON.parse(event.body);
   let postId = body.postID;
   let parentId = body.parentID;
-
+  console.log("Get Body",body)
   let params = {
     TableName: dynamoDBTableName,
     Key: {
@@ -18,9 +18,10 @@ export const handler = async (event: any) => {
       REFERENCE: postId,
     },
   };
-
+  console.log("Get Params", params);
   try {
     let data = await ddbDoc.send(new GetCommand(params));
+    console.log('Get Data Item', data.Item);
     response = buildResponse(200, data.Item);
   } catch (err) {
     response = buildResponse(400, "error with command");
