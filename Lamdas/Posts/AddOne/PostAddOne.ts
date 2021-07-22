@@ -10,7 +10,7 @@ export const handler = async (event: any) => {
   let body = JSON.parse(event.body);
   let postId = body.postID;
   let parentId = body.parentID;
-  let timestamp = body.timestamp;
+  let Stamp = body.Stamp;
   let content = body.content;
   let image = body.image;
 
@@ -19,12 +19,11 @@ export const handler = async (event: any) => {
     Item: {
       TYPEID: parentId,
       REFERENCE: postId,
-      timestamp,
+      Stamp,
       content,
       image,
     },
   };
-  console.log("params", params);
   try {
     await ddbDoc.send(new PutCommand(params));
     response = buildResponse(200, "Success");
