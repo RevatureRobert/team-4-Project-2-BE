@@ -7,11 +7,7 @@ WORKDIR /app
 COPY package.json ./
 RUN npm install
 
-COPY build/Lamdas/Posts/GetOne ./
+COPY build/Lamdas ./
 
 COPY build/DB ./
 
-# WORKDIR /Post
-
-
-CMD [PostGetOne.handler]
