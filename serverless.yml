@@ -8,7 +8,54 @@ provider:
   name: aws
   runtime: nodejs14.x
   lambdaHashingVersion: 20201221
+  ecr:
+    images:
+      scouterLambdas:
+        path: ./
 
 functions:
   PostGetOne:
-    image: to be filled in
+    image: 
+      name: scouterLambdas
+      command: 
+        - PostGetOne.handler
+      entryPoint:
+        - '/Post/GetOne'
+  PostAddOne:
+    image: 
+      name: scouterLambdas
+      command: 
+        - PostAddOne.handler
+      entryPoint:
+        - '/Post/AddOne'
+  PostUpdateOne:
+    image: 
+      name: scouterLambdas
+      command: 
+        - PostUpdateOne.handler
+      entryPoint:
+        - '/Post/UpdateOne'
+  PostUpdateOne:
+    image: 
+      name: scouterLambdas
+      command: 
+        - PostDeleteOne.handler
+      entryPoint:
+        - '/Post/Delete'
+  PostGetAllFollowed:
+    image: 
+      name: scouterLambdas
+      command: 
+        - PostGetAllFollowed.handler
+      entryPoint:
+        - '/Post/GetAllFollowed'
+  PostGetAllPage:
+    image: 
+      name: scouterLambdas
+      command: 
+        - PostGetAllPage.handler
+      entryPoint:
+        - '/Post/GetAllPage'
+
+
+
