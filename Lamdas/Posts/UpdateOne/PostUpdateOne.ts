@@ -10,7 +10,6 @@ export const handler = async (event: any) => {
   let body = JSON.parse(event.body);
   let postId = body.postID;
   let parentId = body.parentID;
-  //console.log("update Body:", body);
   let updateString: string = "set ";
   let expressionValues: Object = {};
   Object.entries(body).forEach(([attribute, value]) => {
