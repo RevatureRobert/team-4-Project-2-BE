@@ -3,19 +3,20 @@ import { ddbDoc } from "../../../DB/Dynamo";
 
 const dynamoDBTableName = "ScouterApp";
 
-exports.handler = async (event: any) => {
+export const handler = async (event: any) => {
   console.log("Request event: ", event);
   let response = {};
 
   let body = JSON.parse(event.body);  
   let parentId = body.parentID;
-  let bio = body.bio;
+  let bio = body.bio; 
   let image = body.image;
   
 
   let params = {
     TableName: dynamoDBTableName,
     Item: {
+      REFERENCE:'0',
       TYPEID: parentId,
       bio,
       image,

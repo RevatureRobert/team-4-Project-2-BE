@@ -3,7 +3,7 @@ import { ddbDoc } from "../../../DB/Dynamo";
 
 const dynamoDBTableName = "ScouterApp";
 
-exports.handler = async (event: any) => {
+export const handler = async (event: any) => {
   console.log("Request event: ", event);
   let response = {};
 
@@ -14,12 +14,12 @@ exports.handler = async (event: any) => {
     TableName: dynamoDBTableName,
     Key: {
       TYPEID: parentId,
-      
+      REFERENCE:'0',
     },
   };
 
   try {
-    let data = await ddbDoc.send(new GetCommand(params));
+    let data =await ddbDoc.send(new GetCommand(params));
     response = buildResponse(200, data.Item);
   } catch (err) {
     response = buildResponse(400, "error with command");
