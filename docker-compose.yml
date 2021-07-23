@@ -1,0 +1,46 @@
+version: "3.91"
+services:
+    post-add-one:
+        build: 
+            context: ./
+            dockerfile: Docker/Posts/AddOne/Dockerfile
+        image: post-add-one:latest
+    post-get-one:
+        build: 
+            context: ./
+            dockerfile: Docker/Posts/GetOne/Dockerfile
+        image: post-get-one:latest
+    anime-get-one:
+        build:
+            context: ./
+            dockerfile: Docker/Anime/GetOne/Dockerfile
+        image: anime-get-one:latest
+    anime-add-one:
+        build:
+            context: ./
+            dockerfile: Docker/Anime/AddOne/Dockerfile
+        image: anime-add-one:latest
+    anime-get-all:
+        build:
+            context: ./
+            dockerfile: Docker/Anime/GetAll/Dockerfile
+        image: anime-get-all:latest
+    anime-get-by-search:
+        build:
+            context: ./
+            dockerfile: Docker/Anime/GetBySearch/Dockerfile
+        image: anime-get-by-search:latest
+    anime-update-one:
+        build:
+            context: ./
+            dockerfile: Docker/Anime/UpdateOne/Dockerfile
+        image: anime-update-one:latest
+    anime-delete-one:
+        build:
+            context: ./
+            dockerfile: Docker/Anime/DeleteOne/Dockerfile
+        image: anime-delete-one:latest
+                            
+                        
+                    
+                

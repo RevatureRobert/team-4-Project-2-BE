@@ -3,19 +3,21 @@ import { ddbDoc } from "../../../DB/Dynamo";
 
 const dynamoDBTableName = "ScouterApp";
 
+
 export const handler = async (event: any) => {
   console.log("Request event: ", event);
   let response = {};
 
   let body = JSON.parse(event.body);
-  let postId = body.postID;
+  let REFERENCE='0';
   let parentId = body.parentID;
 
   let params = {
     TableName: dynamoDBTableName,
     Key: {
+      REFERENCE,
       TYPEID: parentId,
-      REFERENCE: postId,
+     
     },
   };
 
