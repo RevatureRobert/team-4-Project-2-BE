@@ -2,8 +2,7 @@ import { PutCommand } from "@aws-sdk/lib-dynamodb";
 import { ddbDoc } from "../../../DB/Dynamo";
 
 const dynamoDBTableName = "ScouterApp";
-
-exports.handler = async (event: any) => {
+export const handler = async (event: any) => {
   console.log("Request event: ", event);
   let response = {};
 
@@ -16,6 +15,7 @@ exports.handler = async (event: any) => {
   let params = {
     TableName: dynamoDBTableName,
     Item: {
+      REFERENCE:'0',
       TYPEID: parentId,
       bio,
       image,

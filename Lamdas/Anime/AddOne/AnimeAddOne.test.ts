@@ -3,7 +3,6 @@ describe("AnimeAddOne", () => {
   test("Should return status 200", async () => {
     let body = {      
       parentID: `A#DragonBall`,      
-      
       bio: `This is anime`,
       image: `no image`,
     };
@@ -17,7 +16,7 @@ describe("AnimeAddOne", () => {
   test("Should return status 400", async () => {
     let body = {    
       parentID: undefined,     
-      bio: `This is t e post`,
+      bio: `This is the post`,
       image: `no image`,
     };
     let request = JSON.stringify(body);
