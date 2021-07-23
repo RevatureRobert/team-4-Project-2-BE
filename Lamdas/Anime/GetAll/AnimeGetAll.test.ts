@@ -1,11 +1,11 @@
-import { handler as addHandler } from "../AddOne/AnimeAddOne"
-import { handler as getPageHandler } from "../GetOne/AnimeGetOne"
+import { handler as addHandler } from "../AddOne/AnimeAddOne";
+import { handler as getAnimeHandler } from "./AnimeGetAll";
 
 describe("GetAllPage", () => {
   beforeEach(async () => {
     let body1 = {
       REFERENCE: `0`,
-      TYPEID: `A#DragonBall`,      
+      parentID: `A#DragonBall`,      
       bio: `This is the post`,
       image: `no image`,
     };
@@ -14,84 +14,85 @@ describe("GetAllPage", () => {
     await addHandler({ body: addRequest });
 
     let body2 = {
-        REFERENCE: `0`,
-        TYPEID: `A#Pokemon`,      
-        bio: `Got to catch them all again!`,
-        image: `no image`,
+      REFERENCE: `0`,
+      parentID: `A#Pokemon`,      
+      bio: `This is the post`,
+      image: `no image`,
     };
     addRequest = JSON.stringify(body2);
 
     await addHandler({ body: addRequest });
 
     let body3 = {
-        REFERENCE: `0`,
-        TYPEID: `A#Onepiece`,      
-        bio: `pirates and stuff`,
-        image: `no image`,
+      REFERENCE: `0`,
+      parentID: `A#DemonSlayer`,      
+      bio: `This is the post`,
+      image: `no image`,
     };
     addRequest = JSON.stringify(body3);
 
     await addHandler({ body: addRequest });
 
     let body4 = {
-        REFERENCE: `0`,
-        TYPEID: `A#Demonslayer`,      
-        bio: `Brother and sister try to avenge sister being turned into a demon`,
-        image: `no image`,
+      REFERENCE: `0`,
+      parentID: `A#OnePiece`,      
+      bio: `This is the post`,
+      image: `no image`,
     };
     addRequest = JSON.stringify(body4);
 
     await addHandler({ body: addRequest });
   });
 
-  test("Should return status 200 and all anime info", async () => {
+  test("Should return status 200 and all anime", async () => {
     const body = {
-     REFERENCE: "0",
+        REFERENCE: '0',
+        parentID:"A#"
     };
 
     const expected = [
       {
         REFERENCE: `0`,
-        TYPEID: `A#DragonBall`,        
+        TYPEID: `A#DragonBall`,       
         bio: `This is the post`,
         image: `no image`,
       },
       {
         REFERENCE: `0`,
-        TYPEID: `A#Pokemon`,        
-        bio: `Got to catch them all again!`,
+        TYPEID: `A#Pokemon`,       
+        bio: `This is the post`,
         image: `no image`,
       },
       {
         REFERENCE: `0`,
-        TYPEID: `A#Onepiece`,     
-        bio: `pirates and stuff`,
+        TYPEID: `A#DemonSlayer`,       
+        bio: `This is the post`,
         image: `no image`,
       },
       {
         REFERENCE: `0`,
-        TYPEID: `A#Demonslayer`,     
-        bio: `Brother and sister try to avenge sister being turned into a demon`,
+        TYPEID: `A#OnePiece`,       
+        bio: `This is the post`,
         image: `no image`,
       },
-
     ];
 
     let getPageRequest = JSON.stringify(body);
-    let response: any = await getPageHandler({ body: getPageRequest });
-
-    expect(response.statusCode).toBeDefined();
-    let responseBody = JSON.parse(response.body);
-    expect(responseBody).toContain(JSON.stringify(expected));
+    let response: any = await getAnimeHandler({ body: getPageRequest });
+    
+    expect(response.statusCode).toBe(200);
+  
+   
   });
 
   test("Should return status 400", async () => {
     const body = {
-      pageID: undefined,
+      REFERENCE: "1",
+      parentID:"U#",
     };
 
     let getPageRequest = JSON.stringify(body);
-    let response: any = await getPageHandler({ body: getPageRequest });
+    let response: any = await getAnimeHandler({ body: getPageRequest });
 
     expect(response.statusCode).toBe(400);
   });
