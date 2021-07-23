@@ -3,7 +3,7 @@ import { ddbDoc } from "../../../DB/Dynamo";
 
 const dynamoDBTableName = "ScouterApp";
 
-exports.handler = async (event: any) => {
+export const handler = async (event: any) => {
   console.log("Request event: ", event);
   let response = {};
 
@@ -13,9 +13,17 @@ exports.handler = async (event: any) => {
 
   let params = {
     TableName: dynamoDBTableName,
-    FilterExpression: `TYPEID = ${pageId} AND NOT REFERENCE = 0`,
+    FilterExpression: `#typ = :id AND NOT #ref = :z`,
+    ExpressionAttributeNames: {
+      "#typ": "TYPEID",
+      "#ref": "REFERENCE",
+    },
+    ExpressionAttributeValues: {
+      ":id": pageId,
+      ":z": 0,
+    },
   };
-
+  console.log("Params", params);
   try {
     let data = await ddbDoc.send(new ScanCommand(params));
     response = buildResponse(200, data.Items);

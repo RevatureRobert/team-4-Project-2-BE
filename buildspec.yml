@@ -3,64 +3,21 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      # install docker compose
-      - curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-      - chmod +x /usr/local/bin/docker-compose
+      # install serverless
+      - npm install serverless
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
       # install dependacies
       - npm install
-      # Only first build for each image
-      # aws ecr create-repository --repository-name post-get-one --image-scanning-configuration scanOnPush=true --region us-east-2
-      # aws ecr create-repository --repository-name post-add-one --image-scanning-configuration scanOnPush=true --region us-east-2
-      # aws ecr create-repository --repository-name anime-add-one --image-scanning-configuration scanOnPush=true --region us-east-2
-      # aws ecr create-repository --repository-name anime-get-one --image-scanning-configuration scanOnPush=true --region us-east-2
-      # aws ecr create-repository --repository-name anime-get-all --image-scanning-configuration scanOnPush=true --region us-east-2
-      # aws ecr create-repository --repository-name anime-get-by-search --image-scanning-configuration scanOnPush=true --region us-east-2
-      # aws ecr create-repository --repository-name anime-update-one --image-scanning-configuration scanOnPush=true --region us-east-2
-      # aws ecr create-repository --repository-name anime-delete-one --image-scanning-configuration scanOnPush=true --region us-east-2
   build:
     commands:
       - echo Build started on `date`
+      # run unit tests
+      - echo Testing
+      - npm run test
       # transpile typescript
       - echo transpiling typescript
       - npm run build
-      - echo Building the Docker image...
-      # Build post-get-one
-      - docker-compose create
-      - docker tag post-get-one:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/post-get-one:$IMAGE_TAG
-      # Build post-add-one
-      - docker tag post-add-one:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/post-add-one:$IMAGE_TAG
-      # Build anime-add-one
-      - docker tag anime-add-one:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/anime-add-one:$IMAGE_TAG
-      # Build anime-get-one
-      - docker tag anime-get-one:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/anime-get-one:$IMAGE_TAG
-      # Build anime-get-all
-      - docker tag anime-get-all:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/anime-get-all:$IMAGE_TAG
-      # Build anime-get-by-search
-      - docker tag anime-get-by-search:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/anime-get-by-search:$IMAGE_TAG
-      # Build anime-update-one
-      - docker tag anime-update-one:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/anime-update-one:$IMAGE_TAG
-      # Build anime-delete-one
-      - docker tag anime-delete-one:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/anime-delete-one:$IMAGE_TAG
-
-  post_build:
-    commands:
-      - echo Build completed on `date`
-      - echo Pushing the Docker image...
-      # Push post-get-one
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/post-get-one:$IMAGE_TAG
-      # Push post-add-one
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/post-add-one:$IMAGE_TAG
-      # Push anime-add-one
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/anime-add-one:$IMAGE_TAG
-      # Push anime-get-one
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/anime-get-one:$IMAGE_TAG
-      # Push anime-get-all
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/anime-get-all:$IMAGE_TAG
-      # Push anime-get-by-search
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/anime-get-by-search:$IMAGE_TAG
-      # Push anime-update-one
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/anime-update-one:$IMAGE_TAG
-      # Push anime-delete-one
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/anime-delete-one:$IMAGE_TAG
+      # build serverless package
+      - echo Building the Serverless Package
+      - serverless package --package /ScouterApp
