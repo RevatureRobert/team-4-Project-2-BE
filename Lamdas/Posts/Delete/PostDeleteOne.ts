@@ -21,7 +21,7 @@ export const handler = async (event: any) => {
 
   try {
     await ddbDoc.send(new DeleteCommand(params));
-    response = buildResponse(200, "Seccess");
+    response = buildResponse(200, "Success");
   } catch (err) {
     response = buildResponse(400, "error with command");
     console.log(err);
