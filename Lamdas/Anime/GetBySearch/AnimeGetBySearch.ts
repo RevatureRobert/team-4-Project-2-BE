@@ -3,36 +3,40 @@ import { ddbDoc } from "../../../DB/Dynamo";
 
 const dynamoDBTableName = "ScouterApp";
 
-exports.handler = async (event: any) => {
+export const handler = async (event: any) => {
   console.log("Request event: ", event);
   let response = {};
-
-  let body = JSON.parse(event.body);  
-  let parentId = body.parentID;
-
-  let params = {
-    TableName: dynamoDBTableName,
-    FilterExpression:"contains(TYPEID, :subject) AND #ref=:p AND begins_with(TYPEID, :atag)",
+  let body = JSON.parse(event.body); 
+  let search = body.searchValue;
+  const params = {
+    // Specify which items in the results are returned.
+    FilterExpression: "contains(TYPEID,:search) AND #ref =:ref",
+    // Define the expression attribute value, which are substitutes for the values you want to compare.
+    ExpressionAttributeValues: {
+      ":ref": "0",
+      ":search": search,
+      
+    },
     ExpressionAttributeNames:{
-        "#ref":"REFERENCE;"
+      "#ref":"REFERENCE",
     },
-    ExpressionAttributeValues:{
-        ":subject": name,
-        ":p":'0',
-        ":atag": "A#"
-    },
+    // Set the projection expression, which are the attributes that you want.
+    ProjectionExpression: " TYPEID",
+    TableName: dynamoDBTableName,
   };
-
-  try {
-    let data = await ddbDoc.send(new ScanCommand(params));
-    response = buildResponse(200, data.Items);
-  } catch (err) {
-    response = buildResponse(400, "error with command");
-    console.log(err);
-  }
+      try {
+        const data = await ddbDoc.send(new ScanCommand(params));
+        console.log(data.Items);
+        return response = buildResponse(200, data.Items);
+    
+      } catch (err) {
+        response = buildResponse(400, "error with command");
+        console.log(err);
+      }
+    
 
   return response;
-};
+    };
 
 function buildResponse(statusCode: number, body: any) {
   return {

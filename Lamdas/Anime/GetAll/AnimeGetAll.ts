@@ -3,33 +3,35 @@ import { ddbDoc } from "../../../DB/Dynamo";
 
 const dynamoDBTableName = "ScouterApp";
 
-exports.handler = async (event: any) => {
+export const handler = async (event: any) => {
   console.log("Request event: ", event);
   let response = {};
 
+  
   let body = JSON.parse(event.body);  
-  let parentId = body.parentID;
-
-  let params = {
+  
+  const params = {
     TableName: dynamoDBTableName,
-    FilterExpression: "begins_with(TYPEID, :atag) and #r = :zero",
+    FilterExpression: "contains(TYPEID, :atag) AND #r = :zero",
     ExpressionAttributeNames:{
-        "#r":"REFERENCE;"
+        "#r": "REFERENCE"
     },
-    ExpressionAttributeValues:{
+    ExpressionAttributeValues: {
         ":atag": "A#",
-        ":zero":'0',
-       
-    },
-  };
+        ":zero": "0"
+    }
+};
+try {
+    const data = await ddbDoc.send(new ScanCommand(params));
+    console.log("Success :", data.Items);
+    
 
-  try {
-    let data = await ddbDoc.send(new ScanCommand(params));
-    response = buildResponse(200, data.Items);
-  } catch (err) {
+    response = buildResponse(200,data.Items);
+} catch (err) {
     response = buildResponse(400, "error with command");
-    console.log(err);
-  }
+    console.log("Error", err);
+}
+  
 
   return response;
 };
