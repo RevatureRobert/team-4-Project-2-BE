@@ -16,15 +16,10 @@ export const handler = async (event: any) => {
             REFERENCE: "0",
         },
     };
-    try {
-        await ddbDoc.send(new DeleteCommand(params));
-        response = buildResponse(200, "Success - User deleted");
-    } catch(err){
-        response = buildResponse(400, "DELETE command error");
-        console.log(err);
-    }
-    return response;
+    await ddbDoc.send(new DeleteCommand(params));
+    return buildResponse(200, "Success - User deleted");
 }
+
 function buildResponse(statusCode: number, body: any) {
     return {
       statusCode,
