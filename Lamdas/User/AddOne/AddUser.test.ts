@@ -2,13 +2,13 @@ import {handler} from './AddUser';
 
 describe("AddUser", () => {
     test("Should return Status Code 200", async () => {
-        let uid = "cheeseburger";
+        let userID = "cheeseburger";
         let body = {
-            TYPEID: "U#"+uid,
+            TYPEID: "U#"+userID,
             REFERENCE: "0",
             image: "cheeseburger.jpg",
             bio: "I like anime and fast food",
-            wishlist: ["One Piece", "Demon Slayer", "DragonBallZ"],
+            watchlist: ["One Piece", "Demon Slayer", "DragonBallZ"],
             followed: ["newUser", "taka"],
             favorites: ["One Piece", "Zatch Bell"],
         };
@@ -21,7 +21,7 @@ describe("AddUser", () => {
         //invalid number of parameters causes 400 status code
         let body = {
             bio: 2,
-            wishlist: ["One Piece", "Demon Slayer", "DragonBallZ"],
+            watchlist: ["One Piece", "Demon Slayer", "DragonBallZ"],
             followed: ["newUser", "taka"],
             favorites: ["One Piece", "Zatch Bell"],
         };

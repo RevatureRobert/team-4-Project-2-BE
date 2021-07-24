@@ -8,7 +8,7 @@ describe("GetUser", () => {
             REFERENCE: "0",
             image: "cheeseburger.jpg",
             bio: "I like anime and fast food",
-            wishlist: ["One Piece", "Demon Slayer", "DragonBallZ"],
+            watchlist: ["One Piece", "Demon Slayer", "DragonBallZ"],
             followed: ["newUser", "taka"],
             favorites: ["One Piece", "Zatch Bell"],
         }
@@ -23,7 +23,7 @@ describe("GetUser", () => {
             REFERENCE: "0",
             image: "cheeseburger.jpg",
             bio: "I like anime and fast food",
-            wishlist: ["One Piece", "Demon Slayer", "DragonBallZ"],
+            watchlist: ["One Piece", "Demon Slayer", "DragonBallZ"],
             followed: ["newUser", "taka"],
             favorites: ["One Piece", "Zatch Bell"],
             TYPEID: "U#"+getBody.userID,

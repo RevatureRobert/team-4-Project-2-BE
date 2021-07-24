@@ -10,7 +10,7 @@ export const handler = async (event:any) => {
     let REFERENCE = "0";
     let image = body.image;
     let bio = body.bio;
-    let wishlist = body.wishlist;
+    let watchlist = body.watchlist;
     let followed = body.followed;
     let favorites = body.favorites;
 
@@ -21,7 +21,7 @@ export const handler = async (event:any) => {
             REFERENCE,
             image,
             bio,
-            wishlist,
+            watchlist,
             followed,
             favorites,
         },
