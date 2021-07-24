@@ -1,5 +1,5 @@
 import { GetCommand } from "@aws-sdk/lib-dynamodb";
-import { ddbDoc } from "DB/Dynamo";
+import { ddbDoc } from "../../../DB/Dynamo";
 
 const TABLE = "ScouterApp";
 
@@ -10,25 +10,18 @@ export const handler = async (event: any) => {
 
     // convert body param in JSON to object 
     let body = JSON.parse(event.body);
-    let uid = body.userID;
     console.log(`Get body: \n`, body);
 
     let params = {
         TableName: TABLE,
         Key: {
-            TYPEID: "U#" + uid,
+            TYPEID: "U#" + body.userID,
             REFERENCE: "0",
         },
     };
     console.log("Get Params", params);
-    try{
-       let data = await ddbDoc.send(new GetCommand(params));
-       response = buildResponse(200, data.Item); 
-    } catch(err){
-        //if user error
-        response = buildResponse(400, "GET command error");
-        console.log(err);
-    }
+    let data = await ddbDoc.send(new GetCommand(params));
+    response = buildResponse(200, data.Item); 
     return response;
 }
 
