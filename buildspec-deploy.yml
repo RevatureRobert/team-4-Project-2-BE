@@ -4,6 +4,6 @@ phases:
   pre_deploy:
     commands:
       #install serverless
-      - npm install serverless
+      - npm install -g serverless
   deploy:
     commands: serverless deploy --package /ScouterApp
