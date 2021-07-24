@@ -1,7 +1,7 @@
 version: 0.2
 
 phases:
-  pre_deploy:
+  pre_build:
     commands:
       # install serverless
       - npm install -g serverless
@@ -13,5 +13,5 @@ phases:
       # transpile typescript
       - echo transpiling typescript
       - npm run build
-  deploy:
+  post_build:
     commands: serverless deploy
