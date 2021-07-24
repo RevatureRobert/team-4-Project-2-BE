@@ -85,15 +85,4 @@ describe("GetAllPage", () => {
    
   });
 
-  test("Should return status 400", async () => {
-    const body = {
-      REFERENCE: "1",
-      parentID:"U#",
-    };
-
-    let getPageRequest = JSON.stringify(body);
-    let response: any = await getAnimeHandler({ body: getPageRequest });
-
-    expect(response.statusCode).toBe(400);
-  });
 });

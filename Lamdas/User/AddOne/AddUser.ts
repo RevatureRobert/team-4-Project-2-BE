@@ -1,5 +1,5 @@
 import { PutCommand } from "@aws-sdk/lib-dynamodb";
-import { ddbDoc } from "DB/Dynamo";
+import { ddbDoc } from "../../../DB/Dynamo";
 
 const TABLE = "ScouterApp";
 
@@ -7,22 +7,21 @@ export const handler = async (event:any) => {
     let response = {};
 
     let body = JSON.parse(event.body);
-    let uid = body.userID;
     let REFERENCE = "0";
     let image = body.image;
     let bio = body.bio;
-    let wishlist = body.wishlist;
+    let watchlist = body.watchlist;
     let followed = body.followed;
     let favorites = body.favorites;
 
     let params = {
         TableName: TABLE,
         Item: {
-            TYPEID: "U#" + uid,
+            TYPEID: "U#" + body.userID,
             REFERENCE,
             image,
             bio,
-            wishlist,
+            watchlist,
             followed,
             favorites,
         },
