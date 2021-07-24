@@ -21,17 +21,13 @@ export const handler = async (event: any) => {
         ":zero": "0"
     }
 };
-try {
+
     const data = await ddbDoc.send(new ScanCommand(params));
     console.log("Success :", data.Items);
     
 
     response = buildResponse(200,data.Items);
-} catch (err) {
-    response = buildResponse(400, "error with command");
-    console.log("Error", err);
-}
-  
+
 
   return response;
 };
