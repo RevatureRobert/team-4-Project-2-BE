@@ -27,63 +27,60 @@ provider:
             - dynamodb:PutItem
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
-          Resource: 'arn:aws:dynamodb:us-east-2:*:*'
+          Resource: "arn:aws:dynamodb:us-east-2:*:*"
 
 functions:
   PostGetOne:
-    image: 
+    image:
       name: scouterLambdas
-      command: 
-        - '/Post/GetOne/PostGetOne.handler'
+      command:
+        - "/Post/GetOne/PostGetOne.handler"
     events:
       - http:
-         path: Post
-         method: get
+          path: Post
+          method: get
   PostAddOne:
-    image: 
+    image:
       name: scouterLambdas
-      command: 
-        - '/Post/AddOne/PostAddOne.handler'
+      command:
+        - "/Post/AddOne/PostAddOne.handler"
     events:
       - http:
-         path: Post
-         method: post
+          path: Post
+          method: post
   PostUpdateOne:
-    image: 
+    image:
       name: scouterLambdas
-      command: 
-        - '/Post/UpdateOne/PostUpdateOne.handler'
+      command:
+        - "/Post/UpdateOne/PostUpdateOne.handler"
     events:
       - http:
-         path: Post
-         method: put
-  PostUpdateOne:
-    image: 
+          path: Post
+          method: put
+  PostDeleteOne:
+    image:
       name: scouterLambdas
-      command: 
-        - '/Post/Delete/PostDeleteOne.handler'
+      command:
+        - "/Post/Delete/PostDeleteOne.handler"
     events:
       - http:
-         path: Post
-         method: delete
+          path: Post
+          method: delete
   PostGetAllFollowed:
-    image: 
+    image:
       name: scouterLambdas
-      command: 
-        - '/Post/GetAllFollowed/PostGetAllFollowed.handler'
+      command:
+        - "/Post/GetAllFollowed/PostGetAllFollowed.handler"
     events:
       - http:
-         path: Post/follow
-         method: get
+          path: Post/follow
+          method: get
   PostGetAllPage:
-    image: 
+    image:
       name: scouterLambdas
-      command: 
-        - '/Post/GetAllPage/PostGetAllPage.handler' 
+      command:
+        - "/Post/GetAllPage/PostGetAllPage.handler"
     events:
       - http:
-         path: Post/Page
-         method: get
-
-
-
+          path: Post/Page
+          method: get
