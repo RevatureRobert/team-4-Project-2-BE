@@ -34,7 +34,7 @@ functions:
     image:
       name: scouterLambdas
       command:
-        - "./Lamdas/Post/GetOne/PostGetOne.handler"
+        - "./Lamdas/Posts/GetOne/PostGetOne.handler"
       entryPoint:
         - "/lambda-entrypoint.sh"
     events:
@@ -45,7 +45,7 @@ functions:
     image:
       name: scouterLambdas
       command:
-        - "./Lamdas/Post/AddOne/PostAddOne.handler"
+        - "./Lamdas/Posts/AddOne/PostAddOne.handler"
       entryPoint:
         - "/lambda-entrypoint.sh"
     events:
@@ -56,7 +56,7 @@ functions:
     image:
       name: scouterLambdas
       command:
-        - "./Lamdas/Post/UpdateOne/PostUpdateOne.handler"
+        - "./Lamdas/Posts/UpdateOne/PostUpdateOne.handler"
       entryPoint:
         - "/lambda-entrypoint.sh"
     events:
@@ -67,7 +67,7 @@ functions:
     image:
       name: scouterLambdas
       command:
-        - "./Lamdas/Post/Delete/PostDeleteOne.handler"
+        - "./Lamdas/Posts/Delete/PostDeleteOne.handler"
       entryPoint:
         - "/lambda-entrypoint.sh"
     events:
@@ -78,7 +78,7 @@ functions:
     image:
       name: scouterLambdas
       command:
-        - "./Lamdas/Post/GetAllFollowed/PostGetAllFollowed.handler"
+        - "./Lamdas/Posts/GetAllFollowed/PostGetAllFollowed.handler"
       entryPoint:
         - "/lambda-entrypoint.sh"
     events:
@@ -89,7 +89,7 @@ functions:
     image:
       name: scouterLambdas
       command:
-        - "./Lamdas/Post/GetAllPage/PostGetAllPage.handler"
+        - "./Lamdas/Posts/GetAllPage/PostGetAllPage.handler"
       entryPoint:
         - "/lambda-entrypoint.sh"
     events:
