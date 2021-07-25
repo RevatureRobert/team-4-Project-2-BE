@@ -30,7 +30,7 @@ provider:
           Resource: "arn:aws:dynamodb:us-east-2:*:*"
 
 functions:
-#Post Lambdas
+  #Post Lambdas
   PostGetOne:
     image:
       name: scouterLambdas
@@ -62,13 +62,10 @@ functions:
         - "/lambda-entrypoint.sh"
     events:
       - http:
-         path: Post
-         method: put
+          path: Post
+          method: put
   PostDeleteOne:
     image:
-      name: scouterLambdas
-          path: Post
-          method: put 
       name: scouterLambdas
       command:
         - "./Lamdas/Posts/Delete/PostDeleteOne.handler"
@@ -98,129 +95,128 @@ functions:
         - "/lambda-entrypoint.sh"
     events:
       - http:
-         path: Post/Page
-         method: get
+          path: Post/Page
+          method: get
   #Anime Lambdas
   AnimeGetOne:
-      image: 
-        name: scouterLambdas
-        command: 
-          - './Anime/GetOne/AnimeGetOne.handler'
-        entryPoint:
-          - "/lambda-entrypoint.sh"
-      events:
-        - http:
+    image:
+      name: scouterLambdas
+      command:
+        - "./Anime/GetOne/AnimeGetOne.handler"
+      entryPoint:
+        - "/lambda-entrypoint.sh"
+    events:
+      - http:
           path: Anime
           method: get
   AnimeAddOne:
-      image: 
-        name: scouterLambdas
-        command: 
-          - './Anime/AddOne/AnimeAddOne.handler'
-        entryPoint:
-          - "/lambda-entrypoint.sh"
-      events:
-        - http:
+    image:
+      name: scouterLambdas
+      command:
+        - "./Anime/AddOne/AnimeAddOne.handler"
+      entryPoint:
+        - "/lambda-entrypoint.sh"
+    events:
+      - http:
           path: Anime
           method: post
   AnimeUpdateOne:
-      image: 
-        name: scouterLambdas
-        command: 
-          - './Anime/UpdateOne/AnimeUpdateOne.handler'
-        entryPoint:
-          - "/lambda-entrypoint.sh"
-      events:
-        - http:
+    image:
+      name: scouterLambdas
+      command:
+        - "./Anime/UpdateOne/AnimeUpdateOne.handler"
+      entryPoint:
+        - "/lambda-entrypoint.sh"
+    events:
+      - http:
           path: Anime
           method: put
   AnimeDeleteOne:
-      image: 
-        name: scouterLambdas
-        command: 
-          - './Anime/DeleteOne/AnimeDeleteOne.handler'
-        entryPoint:
-          - "/lambda-entrypoint.sh"
-      events:
-        - http:
+    image:
+      name: scouterLambdas
+      command:
+        - "./Anime/DeleteOne/AnimeDeleteOne.handler"
+      entryPoint:
+        - "/lambda-entrypoint.sh"
+    events:
+      - http:
           path: Anime
           method: delete
   AnimeGetBySearch:
-      image: 
-        name: scouterLambdas
-        command: 
-          - './Anime/GetBySearch/AnimeGetBySearch.handler'
-        entryPoint:
-          - "/lambda-entrypoint.sh"
-      events:
-        - http:
+    image:
+      name: scouterLambdas
+      command:
+        - "./Anime/GetBySearch/AnimeGetBySearch.handler"
+      entryPoint:
+        - "/lambda-entrypoint.sh"
+    events:
+      - http:
           path: Anime/search
-          method: get      
+          method: get
   AnimeGetAll:
-      image: 
-        name: scouterLambdas
-        command: 
-          - './Anime/UpdateOne/AnimeUpdateOne.handler'
-        entryPoint:
-          - "/lambda-entrypoint.sh"
-      events:
-        - http:
+    image:
+      name: scouterLambdas
+      command:
+        - "./Anime/UpdateOne/AnimeUpdateOne.handler"
+      entryPoint:
+        - "/lambda-entrypoint.sh"
+    events:
+      - http:
           path: Anime/all
           method: get
   #User Lambdas
   UserGetOne:
-      image: 
-        name: scouterLambdas
-        command: 
-          - './User/GetOne/GetUser.handler'
-        entryPoint:
-          - "/lambda-entrypoint.sh"
-      events:
-        - http:
+    image:
+      name: scouterLambdas
+      command:
+        - "./User/GetOne/GetUser.handler"
+      entryPoint:
+        - "/lambda-entrypoint.sh"
+    events:
+      - http:
           path: User
-          method: get 
+          method: get
   UserAddOne:
-      image: 
-        name: scouterLambdas
-        command: 
-          - './User/AddOne/AddUser.handler'
-        entryPoint:
-          - "/lambda-entrypoint.sh"
-      events:
-        - http:
+    image:
+      name: scouterLambdas
+      command:
+        - "./User/AddOne/AddUser.handler"
+      entryPoint:
+        - "/lambda-entrypoint.sh"
+    events:
+      - http:
           path: User
-          method: post 
+          method: post
   UserUpdateOne:
-      image: 
-        name: scouterLambdas
-        command: 
-          - './User/UpdateOne/UpdateUser.handler'
-        entryPoint:
-          - "/lambda-entrypoint.sh"
-      events:
-        - http:
+    image:
+      name: scouterLambdas
+      command:
+        - "./User/UpdateOne/UpdateUser.handler"
+      entryPoint:
+        - "/lambda-entrypoint.sh"
+    events:
+      - http:
           path: User
-          method: put    
+          method: put
   UserDeleteOne:
-      image: 
-        name: scouterLambdas
-        command: 
-          - './User/DeleteOne/DeleteUser.handler'
-        entryPoint:
-          - "/lambda-entrypoint.sh"
-      events:
-        - http:
+    image:
+      name: scouterLambdas
+      command:
+        - "./User/DeleteOne/DeleteUser.handler"
+      entryPoint:
+        - "/lambda-entrypoint.sh"
+    events:
+      - http:
           path: User
           method: delete
   UserGetAll:
-      image: 
-        name: scouterLambdas
-        command: 
-          - './User/UpdateOne/GetAllUsers.handler'
-        entryPoint:
-          - "/lambda-entrypoint.sh"
-      events:
-        - http:
+    image:
+      name: scouterLambdas
+      command:
+        - "./User/UpdateOne/GetAllUsers.handler"
+      entryPoint:
+        - "/lambda-entrypoint.sh"
+    events:
+      - http:
           path: User/all
           method: get
-
