@@ -27,59 +27,74 @@ provider:
             - dynamodb:PutItem
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
-          Resource: 'arn:aws:dynamodb:us-east-2:*:*'
+          Resource: "arn:aws:dynamodb:us-east-2:*:*"
 
 functions:
   PostGetOne:
-    image: 
+    image:
       name: scouterLambdas
-      command: 
-        - '/Post/GetOne/PostGetOne.handler'
+      command:
+        - "./Lamdas/Posts/GetOne/PostGetOne.handler"
+      entryPoint:
+        - "/lambda-entrypoint.sh"
     events:
       - http:
-         path: Post
-         method: get
+          path: Post
+          method: get
   PostAddOne:
-    image: 
+    image:
       name: scouterLambdas
-      command: 
-        - '/Post/AddOne/PostAddOne.handler'
+      command:
+        - "./Lamdas/Posts/AddOne/PostAddOne.handler"
+      entryPoint:
+        - "/lambda-entrypoint.sh"
     events:
       - http:
-         path: Post
-         method: post
+          path: Post
+          method: post
   PostUpdateOne:
-    image: 
+    image:
       name: scouterLambdas
-      command: 
-        - '/Post/UpdateOne/PostUpdateOne.handler'
+      command:
+        - "./Lamdas/Posts/UpdateOne/PostUpdateOne.handler"
+      entryPoint:
+        - "/lambda-entrypoint.sh"
     events:
       - http:
          path: Post
          method: put
   PostDeleteOne:
-    image: 
+    image:
       name: scouterLambdas
-      command: 
-        - '/Post/Delete/PostDeleteOne.handler'
+          path: Post
+          method: put 
+      name: scouterLambdas
+      command:
+        - "./Lamdas/Posts/Delete/PostDeleteOne.handler"
+      entryPoint:
+        - "/lambda-entrypoint.sh"
     events:
       - http:
-         path: Post
-         method: delete
+          path: Post
+          method: delete
   PostGetAllFollowed:
-    image: 
+    image:
       name: scouterLambdas
-      command: 
-        - '/Post/GetAllFollowed/PostGetAllFollowed.handler'
+      command:
+        - "./Lamdas/Posts/GetAllFollowed/PostGetAllFollowed.handler"
+      entryPoint:
+        - "/lambda-entrypoint.sh"
     events:
       - http:
-         path: Post/follow
-         method: get
+          path: Post/follow
+          method: get
   PostGetAllPage:
-    image: 
+    image:
       name: scouterLambdas
-      command: 
-        - '/Post/GetAllPage/PostGetAllPage.handler' 
+      command:
+        - "./Lamdas/Posts/GetAllPage/PostGetAllPage.handler"
+      entryPoint:
+        - "/lambda-entrypoint.sh"
     events:
       - http:
          path: Post/Page
@@ -183,3 +198,4 @@ functions:
         - http:
           path: Post/User
           method: get
+

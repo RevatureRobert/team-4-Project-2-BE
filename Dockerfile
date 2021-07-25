@@ -1,13 +1,7 @@
-FROM node:14-alpine
+FROM public.ecr.aws/lambda/nodejs:14
 
-RUN mkdir /app
-
-WORKDIR /app
-
-COPY package.json ./
+COPY package.json build/ ./
 RUN npm install
 
-COPY build/Lamdas ./
 
-COPY build/DB ./
 

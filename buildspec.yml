@@ -3,10 +3,6 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      # install serverless
-      - npm install serverless
-      - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
       # install dependacies
       - npm install
   build:
@@ -15,9 +11,3 @@ phases:
       # run unit tests
       - echo Testing
       - npm run test
-      # transpile typescript
-      - echo transpiling typescript
-      - npm run build
-      # build serverless package
-      - echo Building the Serverless Package
-      - serverless package --package /ScouterApp
