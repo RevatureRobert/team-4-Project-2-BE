@@ -57,7 +57,7 @@ functions:
       - http:
          path: Post
          method: put
-  PostUpdateOne:
+  PostDeleteOne:
     image: 
       name: scouterLambdas
       command: 
@@ -84,6 +84,102 @@ functions:
       - http:
          path: Post/Page
          method: get
-
-
-
+  AnimeGetOne:
+      image: 
+        name: scouterLambdas
+        command: 
+          - '/Anime/GetOne/AnimeGetOne.handler'
+      events:
+        - http:
+          path: Post
+          method: get
+  AnimeAddOne:
+      image: 
+        name: scouterLambdas
+        command: 
+          - '/Anime/AddOne/AnimeAddOne.handler'
+      events:
+        - http:
+          path: Post
+          method: post
+  AnimeUpdateOne:
+      image: 
+        name: scouterLambdas
+        command: 
+          - '/Anime/UpdateOne/AnimeUpdateOne.handler'
+      events:
+        - http:
+          path: Post
+          method: put
+  AnimeDeleteOne:
+      image: 
+        name: scouterLambdas
+        command: 
+          - '/Anime/DeleteOne/AnimeDeleteOne.handler'
+      events:
+        - http:
+          path: Post
+          method: delete
+  AnimeGetBySearch:
+      image: 
+        name: scouterLambdas
+        command: 
+          - '/Anime/GetBySearch/AnimeGetBySearch.handler'
+      events:
+        - http:
+          path: Post/search
+          method: get      
+  AnimeGetAll:
+      image: 
+        name: scouterLambdas
+        command: 
+          - '/Anime/UpdateOne/AnimeUpdateOne.handler'
+      events:
+        - http:
+          path: Post/Anime
+          method: get
+  UserGetOne:
+      image: 
+        name: scouterLambdas
+        command: 
+          - '/User/GetOne/GetUser.handler'
+      events:
+        - http:
+          path: Post
+          method: get 
+  UserAddOne:
+      image: 
+        name: scouterLambdas
+        command: 
+          - '/User/AddOne/AddUser.handler'
+      events:
+        - http:
+          path: Post
+          method: post 
+  UserUpdateOne:
+      image: 
+        name: scouterLambdas
+        command: 
+          - '/User/UpdateOne/UpdateUser.handler'
+      events:
+        - http:
+          path: Post
+          method: put    
+  UserDeleteOne:
+      image: 
+        name: scouterLambdas
+        command: 
+          - '/User/DeleteOne/DeleteUser.handler'
+      events:
+        - http:
+          path: Post
+          method: delete
+  UserGetAll:
+      image: 
+        name: scouterLambdas
+        command: 
+          - '/User/UpdateOne/GetAllUsers.handler'
+      events:
+        - http:
+          path: Post/User
+          method: get
