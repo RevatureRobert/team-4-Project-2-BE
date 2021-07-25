@@ -7,7 +7,7 @@ WORKDIR /app
 COPY package.json ./
 RUN npm install
 
-COPY build/Lamdas ./
+COPY build/Lamdas ./Lamdas
 
-COPY build/DB ./
+COPY build/DB ./DB
 

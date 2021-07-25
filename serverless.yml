@@ -34,7 +34,7 @@ functions:
     image:
       name: scouterLambdas
       command:
-        - "/Post/GetOne/PostGetOne.handler"
+        - "./Lamdas/Post/GetOne/PostGetOne.handler"
     events:
       - http:
           path: Post
@@ -43,7 +43,7 @@ functions:
     image:
       name: scouterLambdas
       command:
-        - "/Post/AddOne/PostAddOne.handler"
+        - "./Lamdas/Post/AddOne/PostAddOne.handler"
     events:
       - http:
           path: Post
@@ -52,7 +52,7 @@ functions:
     image:
       name: scouterLambdas
       command:
-        - "/Post/UpdateOne/PostUpdateOne.handler"
+        - "./Lamdas/Post/UpdateOne/PostUpdateOne.handler"
     events:
       - http:
           path: Post
@@ -61,7 +61,7 @@ functions:
     image:
       name: scouterLambdas
       command:
-        - "/Post/Delete/PostDeleteOne.handler"
+        - "./Lamdas/Post/Delete/PostDeleteOne.handler"
     events:
       - http:
           path: Post
@@ -70,7 +70,7 @@ functions:
     image:
       name: scouterLambdas
       command:
-        - "/Post/GetAllFollowed/PostGetAllFollowed.handler"
+        - "./Lamdas/Post/GetAllFollowed/PostGetAllFollowed.handler"
     events:
       - http:
           path: Post/follow
@@ -79,7 +79,7 @@ functions:
     image:
       name: scouterLambdas
       command:
-        - "/Post/GetAllPage/PostGetAllPage.handler"
+        - "./Lamdas/Post/GetAllPage/PostGetAllPage.handler"
     events:
       - http:
           path: Post/Page
