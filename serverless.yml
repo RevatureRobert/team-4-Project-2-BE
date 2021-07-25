@@ -30,6 +30,7 @@ provider:
           Resource: "arn:aws:dynamodb:us-east-2:*:*"
 
 functions:
+#Post Lambdas
   PostGetOne:
     image:
       name: scouterLambdas
@@ -99,103 +100,127 @@ functions:
       - http:
          path: Post/Page
          method: get
+  #Anime Lambdas
   AnimeGetOne:
       image: 
         name: scouterLambdas
         command: 
-          - '/Anime/GetOne/AnimeGetOne.handler'
+          - './Anime/GetOne/AnimeGetOne.handler'
+        entryPoint:
+          - "/lambda-entrypoint.sh"
       events:
         - http:
-          path: Post
+          path: Anime
           method: get
   AnimeAddOne:
       image: 
         name: scouterLambdas
         command: 
-          - '/Anime/AddOne/AnimeAddOne.handler'
+          - './Anime/AddOne/AnimeAddOne.handler'
+        entryPoint:
+          - "/lambda-entrypoint.sh"
       events:
         - http:
-          path: Post
+          path: Anime
           method: post
   AnimeUpdateOne:
       image: 
         name: scouterLambdas
         command: 
-          - '/Anime/UpdateOne/AnimeUpdateOne.handler'
+          - './Anime/UpdateOne/AnimeUpdateOne.handler'
+        entryPoint:
+          - "/lambda-entrypoint.sh"
       events:
         - http:
-          path: Post
+          path: Anime
           method: put
   AnimeDeleteOne:
       image: 
         name: scouterLambdas
         command: 
-          - '/Anime/DeleteOne/AnimeDeleteOne.handler'
+          - './Anime/DeleteOne/AnimeDeleteOne.handler'
+        entryPoint:
+          - "/lambda-entrypoint.sh"
       events:
         - http:
-          path: Post
+          path: Anime
           method: delete
   AnimeGetBySearch:
       image: 
         name: scouterLambdas
         command: 
-          - '/Anime/GetBySearch/AnimeGetBySearch.handler'
+          - './Anime/GetBySearch/AnimeGetBySearch.handler'
+        entryPoint:
+          - "/lambda-entrypoint.sh"
       events:
         - http:
-          path: Post/search
+          path: Anime/search
           method: get      
   AnimeGetAll:
       image: 
         name: scouterLambdas
         command: 
-          - '/Anime/UpdateOne/AnimeUpdateOne.handler'
+          - './Anime/UpdateOne/AnimeUpdateOne.handler'
+        entryPoint:
+          - "/lambda-entrypoint.sh"
       events:
         - http:
-          path: Post/Anime
+          path: Anime/all
           method: get
+  #User Lambdas
   UserGetOne:
       image: 
         name: scouterLambdas
         command: 
-          - '/User/GetOne/GetUser.handler'
+          - './User/GetOne/GetUser.handler'
+        entryPoint:
+          - "/lambda-entrypoint.sh"
       events:
         - http:
-          path: Post
+          path: User
           method: get 
   UserAddOne:
       image: 
         name: scouterLambdas
         command: 
-          - '/User/AddOne/AddUser.handler'
+          - './User/AddOne/AddUser.handler'
+        entryPoint:
+          - "/lambda-entrypoint.sh"
       events:
         - http:
-          path: Post
+          path: User
           method: post 
   UserUpdateOne:
       image: 
         name: scouterLambdas
         command: 
-          - '/User/UpdateOne/UpdateUser.handler'
+          - './User/UpdateOne/UpdateUser.handler'
+        entryPoint:
+          - "/lambda-entrypoint.sh"
       events:
         - http:
-          path: Post
+          path: User
           method: put    
   UserDeleteOne:
       image: 
         name: scouterLambdas
         command: 
-          - '/User/DeleteOne/DeleteUser.handler'
+          - './User/DeleteOne/DeleteUser.handler'
+        entryPoint:
+          - "/lambda-entrypoint.sh"
       events:
         - http:
-          path: Post
+          path: User
           method: delete
   UserGetAll:
       image: 
         name: scouterLambdas
         command: 
-          - '/User/UpdateOne/GetAllUsers.handler'
+          - './User/UpdateOne/GetAllUsers.handler'
+        entryPoint:
+          - "/lambda-entrypoint.sh"
       events:
         - http:
-          path: Post/User
+          path: User/all
           method: get
 
