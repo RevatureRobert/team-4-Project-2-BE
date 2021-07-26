@@ -40,8 +40,14 @@ functions:
         - "/lambda-entrypoint.sh"
     events:
       - http:
-          path: Post
+          path: Post/{postID}/{parentID}
           method: get
+          request:
+            paramaters:
+              paths:
+                postID: true
+                parentID: true
+
   PostAddOne:
     image:
       name: scouterLambdas
@@ -84,8 +90,9 @@ functions:
         - "/lambda-entrypoint.sh"
     events:
       - http:
-          path: Post/follow
-          method: get
+          path: Post/follow/
+          method: post
+
   PostGetAllPage:
     image:
       name: scouterLambdas
@@ -95,8 +102,13 @@ functions:
         - "/lambda-entrypoint.sh"
     events:
       - http:
-          path: Post/Page
+          path: Post/Page/{pageID}
           method: get
+          request:
+            paramaters:
+              paths:
+                pageID: true
+
   #Anime Lambdas
   AnimeGetOne:
     image:
@@ -209,14 +221,3 @@ functions:
       - http:
           path: User
           method: delete
-  UserGetAll:
-    image:
-      name: scouterLambdas
-      command:
-        - "./User/UpdateOne/GetAllUsers.handler"
-      entryPoint:
-        - "/lambda-entrypoint.sh"
-    events:
-      - http:
-          path: User/all
-          method: get
