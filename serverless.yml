@@ -120,7 +120,7 @@ functions:
     image:
       name: scouterLambdas
       command:
-        - "./Anime/GetOne/AnimeGetOne.handler"
+        - "./Lamdas/Anime/GetOne/AnimeGetOne.handler"
       entryPoint:
         - "/lambda-entrypoint.sh"
     events:
@@ -136,7 +136,7 @@ functions:
     image:
       name: scouterLambdas
       command:
-        - "./Anime/AddOne/AnimeAddOne.handler"
+        - "./Lamdas/Anime/AddOne/AnimeAddOne.handler"
       entryPoint:
         - "/lambda-entrypoint.sh"
     events:
@@ -148,7 +148,7 @@ functions:
     image:
       name: scouterLambdas
       command:
-        - "./Anime/UpdateOne/AnimeUpdateOne.handler"
+        - "./Lamdas/Anime/UpdateOne/AnimeUpdateOne.handler"
       entryPoint:
         - "/lambda-entrypoint.sh"
     events:
@@ -160,7 +160,7 @@ functions:
     image:
       name: scouterLambdas
       command:
-        - "./Anime/DeleteOne/AnimeDeleteOne.handler"
+        - "./Lamdas/Anime/DeleteOne/AnimeDeleteOne.handler"
       entryPoint:
         - "/lambda-entrypoint.sh"
     events:
@@ -172,7 +172,7 @@ functions:
     image:
       name: scouterLambdas
       command:
-        - "./Anime/GetBySearch/AnimeGetBySearch.handler"
+        - "./Lamdas/Anime/GetBySearch/AnimeGetBySearch.handler"
       entryPoint:
         - "/lambda-entrypoint.sh"
     events:
@@ -188,7 +188,7 @@ functions:
     image:
       name: scouterLambdas
       command:
-        - "./Anime/UpdateOne/AnimeUpdateOne.handler"
+        - "./Lamdas/Anime/UpdateOne/AnimeUpdate.handler"
       entryPoint:
         - "/lambda-entrypoint.sh"
     events:
@@ -201,7 +201,7 @@ functions:
     image:
       name: scouterLambdas
       command:
-        - "./User/GetOne/GetUser.handler"
+        - "./Lamdas/User/GetOne/GetUser.handler"
       entryPoint:
         - "/lambda-entrypoint.sh"
     events:
@@ -217,7 +217,7 @@ functions:
     image:
       name: scouterLambdas
       command:
-        - "./User/AddOne/AddUser.handler"
+        - "./Lamdas/User/AddOne/AddUser.handler"
       entryPoint:
         - "/lambda-entrypoint.sh"
     events:
@@ -229,7 +229,7 @@ functions:
     image:
       name: scouterLambdas
       command:
-        - "./User/UpdateOne/UpdateUser.handler"
+        - "./Lamdas/User/UpdateOne/UpdateUser.handler"
       entryPoint:
         - "/lambda-entrypoint.sh"
     events:
@@ -241,7 +241,7 @@ functions:
     image:
       name: scouterLambdas
       command:
-        - "./User/DeleteOne/DeleteUser.handler"
+        - "./Lamdas/User/DeleteOne/DeleteUser.handler"
       entryPoint:
         - "/lambda-entrypoint.sh"
     events:
