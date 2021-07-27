@@ -26,9 +26,8 @@ describe("GetOne", () => {
       content: `This is the post`,
       image: `no image`,
     };
-    let getRequest = JSON.stringify(getBody);
 
-    let getResponse: any = await getHandler({ body: getRequest });
+    let getResponse: any = await getHandler({ pathParameters: getBody });
 
     expect(getResponse.statusCode).toBe(200);
     console.log("Get Response", getResponse);
@@ -41,9 +40,7 @@ describe("GetOne", () => {
       parentID: `A#DragonBall`,
     };
 
-    let getRequest = JSON.stringify(getBody);
-
-    let getResponse: any = await getHandler({ body: getRequest });
+    let getResponse: any = await getHandler({ pathParameters: { getBody } });
 
     expect(getResponse.statusCode).toBe(400);
   });

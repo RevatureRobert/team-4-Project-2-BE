@@ -77,8 +77,8 @@ describe("GetAllPage", () => {
       },
     ];
 
-    let getPageRequest = JSON.stringify(body);
-    let response: any = await getPageHandler({ body: getPageRequest });
+    
+    let response: any = await getPageHandler({ pathParameters: body });
 
     expect(response.statusCode).toBe(200);
     let responseBody = JSON.parse(response.body);
@@ -90,9 +90,7 @@ describe("GetAllPage", () => {
       pageID: undefined,
     };
 
-    let getPageRequest = JSON.stringify(body);
-    let response: any = await getPageHandler({ body: getPageRequest });
-
+    let response: any = await getPageHandler({ pathParameters: body });
     expect(response.statusCode).toBe(400);
   });
 });

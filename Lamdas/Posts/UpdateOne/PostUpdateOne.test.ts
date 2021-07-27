@@ -38,8 +38,8 @@ describe("updateOne", () => {
     //Update entry
     let response: any = await updateHandler({ body: request });
     //Retrieve entry
-    let getRequest = JSON.stringify(getBody);
-    let getResponse: any = await getHandler({ body: getRequest });
+
+    let getResponse: any = await getHandler({ pathParameters: getBody });
     expect(response.statusCode).toBe(200);
     expect(JSON.parse(getResponse.body)).toStrictEqual(expectBody);
   });
