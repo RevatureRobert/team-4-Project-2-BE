@@ -16,10 +16,8 @@ describe("GetOne", () => {
   });
   test("Should return status 200", async () => {
     let getBody = {
-      postID: `10`,
-      postType: "user1",
-      parentType: "A",
-      parentID: `DragonBall`,
+      postID: "user1_10",
+      parentID: `A_DragonBall`,
     };
     let expectBody = {
       REFERENCE: `user1#10`,

@@ -9,8 +9,7 @@ export const handler = async (event: any) => {
 
   let body = event.pathParameters;
 
-  let pageId = body.pageID;
-  let page = body.page;
+  let pageId = body.pageID && body.pageID.replace("_", "#");
   let params = {
     TableName: dynamoDBTableName,
     FilterExpression: `#typ = :id AND NOT #ref = :z`,
@@ -19,7 +18,7 @@ export const handler = async (event: any) => {
       "#ref": "REFERENCE",
     },
     ExpressionAttributeValues: {
-      ":id": pageId + "#" + page,
+      ":id": pageId,
       ":z": 0,
     },
   };
