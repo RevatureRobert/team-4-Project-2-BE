@@ -6,16 +6,15 @@ export const handler = async (event: any) => {
   console.log("Request event: ", event);
   let response = {};
 
-  let body = JSON.parse(event.body);  
+  let body = JSON.parse(event.body);
   let parentId = body.parentID;
   let bio = body.bio;
   let image = body.image;
-  
 
   let params = {
     TableName: dynamoDBTableName,
     Item: {
-      REFERENCE:'0',
+      REFERENCE: "0",
       TYPEID: parentId,
       bio,
       image,
@@ -38,6 +37,8 @@ function buildResponse(statusCode: number, body: any) {
     statusCode,
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+      "Access-Control-Allow-Credentials": true, // Required for cookies, authorization headers with HTTPS
     },
     body: JSON.stringify(body),
   };
