@@ -119,8 +119,12 @@ functions:
         - "/lambda-entrypoint.sh"
     events:
       - http:
-          path: Anime
+          path: Anime/{parentID}
           method: get
+          request:
+            paramaters:
+              paths:
+                parentID: true
   AnimeAddOne:
     image:
       name: scouterLambdas
@@ -163,8 +167,12 @@ functions:
         - "/lambda-entrypoint.sh"
     events:
       - http:
-          path: Anime/search
+          path: Anime/search/{searchValue}
           method: get
+          request:
+            paramaters:
+              paths:
+                searchValue: true
   AnimeGetAll:
     image:
       name: scouterLambdas
@@ -186,8 +194,12 @@ functions:
         - "/lambda-entrypoint.sh"
     events:
       - http:
-          path: User
+          path: User/{userID}
           method: get
+          request:
+            paramaters:
+              paths:
+                userID: true
   UserAddOne:
     image:
       name: scouterLambdas
