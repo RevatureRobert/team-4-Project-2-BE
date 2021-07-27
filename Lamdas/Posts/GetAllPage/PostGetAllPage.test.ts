@@ -50,8 +50,7 @@ describe("GetAllPage", () => {
 
   test("Should return status 200 and all relavent posts", async () => {
     const body = {
-      pageID: "A",
-      page: "DragonBall",
+      pageID: "A_DragonBall",
     };
 
     const expected = [

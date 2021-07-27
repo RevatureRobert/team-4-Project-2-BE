@@ -40,15 +40,13 @@ functions:
         - "/lambda-entrypoint.sh"
     events:
       - http:
-          path: Post/{postType}/{postID}/{parentType}/{parentID}
+          path: Post/{postID}/{parentID}
           method: get
           cors: true
           request:
             paramaters:
               paths:
-                postType: true
                 postID: true
-                parentType: true
                 parentID: true
 
   PostAddOne:
@@ -109,14 +107,13 @@ functions:
         - "/lambda-entrypoint.sh"
     events:
       - http:
-          path: Post/Page/{pageID}/{page}
+          path: Post/Page/{pageID}
           method: get
           cors: true
           request:
             paramaters:
               paths:
                 pageID: true
-                page: true
 
   #Anime Lambdas
   AnimeGetOne:

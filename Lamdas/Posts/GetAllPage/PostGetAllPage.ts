@@ -9,8 +9,7 @@ export const handler = async (event: any) => {
 
   let body = event.pathParameters;
 
-  let pageId = body.pageID;
-  let page = body.page;
+  let pageId = body.pageID && body.pageID.replace("_", "#");
   let params = {
     TableName: dynamoDBTableName,
     FilterExpression: `#typ = :id AND NOT #ref = :z`,
@@ -19,7 +18,7 @@ export const handler = async (event: any) => {
       "#ref": "REFERENCE",
     },
     ExpressionAttributeValues: {
-      ":id": pageId + "#" + page,
+      ":id": pageId,
       ":z": 0,
     },
   };
@@ -42,6 +41,8 @@ function buildResponse(statusCode: number, body: any) {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*", // Required for CORS support to work
       "Access-Control-Allow-Credentials": true, // Required for cookies, authorization headers with HTTPS
+      "Access-Control-Allow-Headers": "*",
+      "Access-Control-Allow-Methods": "*",
     },
     body: JSON.stringify(body),
   };

@@ -8,16 +8,14 @@ export const handler = async (event: any) => {
   let response = {};
 
   let body = event.pathParameters;
-  let postType = event.postType;
-  let postId = body.postID;
-  let parentType = body.parentType;
-  let parentId = body.parentID;
+  let postId = body.postID && body.postID.replace("_", "#");
+  let parentId = body.parentID && body.parentID.replace("_", "#");
   console.log("Get Body", body);
   let params = {
     TableName: dynamoDBTableName,
     Key: {
-      TYPEID: parentType + "#" + parentId,
-      REFERENCE: postType + "#" + postId,
+      TYPEID: parentId,
+      REFERENCE: postId,
     },
   };
   console.log("Get Params", params);
@@ -40,6 +38,8 @@ function buildResponse(statusCode: number, body: any) {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*", // Required for CORS support to work
       "Access-Control-Allow-Credentials": true, // Required for cookies, authorization headers with HTTPS
+      "Access-Control-Allow-Headers": "*",
+      "Access-Control-Allow-Methods": "*",
     },
     body: JSON.stringify(body),
   };
