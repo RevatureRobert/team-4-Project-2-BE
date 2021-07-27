@@ -8,14 +8,16 @@ export const handler = async (event: any) => {
   let response = {};
 
   let body = event.pathParameters;
+  let postType = event.postType;
   let postId = body.postID;
+  let parentType = body.parentType;
   let parentId = body.parentID;
   console.log("Get Body", body);
   let params = {
     TableName: dynamoDBTableName,
     Key: {
-      TYPEID: parentId,
-      REFERENCE: postId,
+      TYPEID: parentType + "#" + parentId,
+      REFERENCE: postType + "#" + postId,
     },
   };
   console.log("Get Params", params);
