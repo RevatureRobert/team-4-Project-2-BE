@@ -50,7 +50,8 @@ describe("GetAllPage", () => {
 
   test("Should return status 200 and all relavent posts", async () => {
     const body = {
-      pageID: "A#DragonBall",
+      pageID: "A",
+      page: "DragonBall",
     };
 
     const expected = [
@@ -77,7 +78,6 @@ describe("GetAllPage", () => {
       },
     ];
 
-    
     let response: any = await getPageHandler({ pathParameters: body });
 
     expect(response.statusCode).toBe(200);
