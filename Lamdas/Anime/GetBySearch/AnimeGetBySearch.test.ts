@@ -62,9 +62,7 @@ describe("GetAnimeBySearch", () => {
           },
         ];
         
-    let getPageRequest = JSON.stringify(body);
-    let response: any = await getHandler({ body: getPageRequest });
-        console.log(getPageRequest)
+    let response: any = await getHandler({ pathParameters: body });
     expect(response.statusCode).toBe(200);
     let responseBody = JSON.parse(response.body);
     expect(responseBody).toStrictEqual(expected);
@@ -75,9 +73,7 @@ describe("GetAnimeBySearch", () => {
       pageID: undefined,
     };
 
-    let getPageRequest = JSON.stringify(body);
-    let response: any = await getHandler({ body: getPageRequest });
-
+    let response: any = await getHandler({ pathParameters: body });
     expect(response.statusCode).toBe(400);
   });
 });

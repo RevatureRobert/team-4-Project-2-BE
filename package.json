@@ -33,6 +33,7 @@
     "babel-jest": "^27.0.6",
     "jest": "^27.0.6",
     "jest-dynalite": "^3.4.1",
+    "jest-silent-reporter": "^0.5.0",
     "typecript": "^0.0.1-security",
     "typescript": "^4.3.5"
   }

@@ -22,10 +22,7 @@ describe("AnimeGetOne", () => {
       bio: `This is the post`,
       image: `no image`,
     };
-    let getRequest = JSON.stringify(getBody);
-
-    let getResponse: any = await getHandler({ body: getRequest });
-
+    let getResponse: any = await getHandler({ pathParameters: getBody });
     expect(getResponse.statusCode).toBe(200);
     expect(JSON.parse(getResponse.body)).toStrictEqual(expectBody);
   });
@@ -34,11 +31,7 @@ describe("AnimeGetOne", () => {
     let getBody = {
         parentID: undefined,
     };
-
-    let getRequest = JSON.stringify(getBody);
-
-    let getResponse: any = await getHandler({ body: getRequest });
-
+    let getResponse: any = await getHandler({ pathParameters: getBody });
     expect(getResponse.statusCode).toBe(400);
   });
 });
