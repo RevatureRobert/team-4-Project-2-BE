@@ -8,7 +8,7 @@ export const handler = async (event: any) => {
   let response = {};
 
   
-  let body = JSON.parse(event.body);  
+  let body = event.pathParameters;  
   
   const params = {
     TableName: dynamoDBTableName,

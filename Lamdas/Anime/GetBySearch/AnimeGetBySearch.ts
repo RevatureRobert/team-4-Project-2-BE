@@ -6,7 +6,7 @@ const dynamoDBTableName = "ScouterApp";
 export const handler = async (event: any) => {
   console.log("Request event: ", event);
   let response = {};
-  let body = JSON.parse(event.body); 
+  let body = event.pathParameters; 
   let search = body.searchValue;
   const params = {
     // Specify which items in the results are returned.
@@ -27,7 +27,7 @@ export const handler = async (event: any) => {
       try {
         const data = await ddbDoc.send(new ScanCommand(params));
         console.log(data.Items);
-        return response = buildResponse(200, data.Items);
+        response = buildResponse(200, data.Items);
     
       } catch (err) {
         response = buildResponse(400, "error with command");

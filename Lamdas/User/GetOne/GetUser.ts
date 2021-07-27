@@ -9,7 +9,7 @@ export const handler = async (event: any) => {
     let response = {};
 
     // convert body param in JSON to object 
-    let body = JSON.parse(event.body);
+    let body = event.pathParameters;
     console.log(`Get body: \n`, body);
 
     let params = {

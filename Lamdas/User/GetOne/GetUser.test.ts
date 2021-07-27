@@ -28,8 +28,7 @@ describe("GetUser", () => {
             favorites: ["One Piece", "Zatch Bell"],
             TYPEID: "U#"+getBody.userID,
         };
-        let getRequest = JSON.stringify(getBody);
-        let getResponse:any = await get({body:getRequest});
+        let getResponse:any = await get({pathParameters:getBody});
         expect(getResponse.statusCode).toBe(200);
         expect(JSON.parse(getResponse.body)).toStrictEqual(expectBody);
     })

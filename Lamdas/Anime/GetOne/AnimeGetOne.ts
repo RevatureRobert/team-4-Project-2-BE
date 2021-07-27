@@ -7,7 +7,7 @@ export const handler = async (event: any) => {
   console.log("Request event: ", event);
   let response = {};
 
-  let body = JSON.parse(event.body);  
+  let body = event.pathParameters;  
   let parentId = body.parentID;
 
   let params = {
