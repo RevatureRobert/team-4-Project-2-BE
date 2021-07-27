@@ -7,19 +7,19 @@ export const handler = async (event: any) => {
   console.log("Request event: ", event);
   let response = {};
 
-  let body = event.pathParameters;  
+  let body = event.pathParameters;
   let parentId = body.parentID;
 
   let params = {
     TableName: dynamoDBTableName,
     Key: {
       TYPEID: parentId,
-      REFERENCE:'0',
+      REFERENCE: "0",
     },
   };
 
   try {
-    let data =await ddbDoc.send(new GetCommand(params));
+    let data = await ddbDoc.send(new GetCommand(params));
     response = buildResponse(200, data.Item);
   } catch (err) {
     response = buildResponse(400, "error with command");
@@ -34,6 +34,8 @@ function buildResponse(statusCode: number, body: any) {
     statusCode,
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+      "Access-Control-Allow-Credentials": true, // Required for cookies, authorization headers with HTTPS
     },
     body: JSON.stringify(body),
   };
