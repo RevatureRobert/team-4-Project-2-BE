@@ -6,7 +6,8 @@ describe("Post Delete One", () => {
     let body = {
       REFERENCE: `0`,
       parentID: `A#DragonBall`,
-    
+      bio: 'something',
+      image: 'literally anything.jpeg'
     };
     let addRequest = JSON.stringify(body);
 
@@ -14,21 +15,17 @@ describe("Post Delete One", () => {
   });
   test("Should return status 200", async () => {
     let body = {
-     REFERENCE: `0`,
-      parentID: `A#DragonBall`,
+        parentID: `A_DragonBall`,
     };
 
-    const request = JSON.stringify(body);
-    const response: any = await deleteHandler({ body: request });
-
+    const response: any = await deleteHandler({pathParameters: body});
     expect(response.statusCode).toBe(200);
   });
 
   test("Should return status 400", async () => {
     let body = {};
-    const request = JSON.stringify(body);
-    const response: any = await deleteHandler({ body: request });
 
+    const response: any = await deleteHandler({pathParameters: body});
     expect(response.statusCode).toBe(400);
   });
 });

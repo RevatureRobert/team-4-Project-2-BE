@@ -7,7 +7,7 @@ export const handler = async (event: any) => {
   console.log("Request event: ", event);
   let response = {};
   let body = event.pathParameters;
-  let search = body.searchValue;
+  let search = body.searchValue && body.searchValue.replace("_", "#");
   const params = {
     // Specify which items in the results are returned.
     FilterExpression: "contains(TYPEID,:search) AND #ref =:ref",

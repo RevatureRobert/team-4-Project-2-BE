@@ -21,16 +21,8 @@ export const handler = async (event: any) => {
       image,
     },
   };
-
-  try {
-    await ddbDoc.send(new PutCommand(params));
-    response = buildResponse(200, "Success");
-  } catch (err) {
-    response = buildResponse(400, "error with command");
-    console.log(err);
-  }
-
-  return response;
+  await ddbDoc.send(new PutCommand(params));
+  return buildResponse(200, "Success");
 };
 
 function buildResponse(statusCode: number, body: any) {

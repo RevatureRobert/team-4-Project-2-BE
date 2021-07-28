@@ -8,7 +8,7 @@ export const handler = async (event: any) => {
   let response = {};
 
   let body = event.pathParameters;
-  let parentId = body.parentID;
+  let parentId = body.parentID && body.parentID.replace("_", "#");
 
   let params = {
     TableName: dynamoDBTableName,
@@ -25,7 +25,6 @@ export const handler = async (event: any) => {
     response = buildResponse(400, "error with command");
     console.log(err);
   }
-
   return response;
 };
 

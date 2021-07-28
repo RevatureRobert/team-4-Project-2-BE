@@ -7,9 +7,9 @@ export const handler = async (event: any) => {
   console.log("Request event: ", event);
   let response = {};
 
-  let body = JSON.parse(event.body);
+  let body = event.pathParameters;
   let REFERENCE = "0";
-  let parentId = body.parentID;
+  let parentId = body.parentID && body.parentID.replace("#", "_");;
 
   let params = {
     TableName: dynamoDBTableName,

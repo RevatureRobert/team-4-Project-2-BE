@@ -14,7 +14,7 @@ describe("AnimeGetOne", () => {
   });
   test("Should return status 200", async () => {
     let getBody = {      
-      parentID: `A#DragonBall`,
+      parentID: `A_DragonBall`,
     };
     let expectBody = {     
       REFERENCE:'0',
