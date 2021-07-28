@@ -43,7 +43,6 @@ describe("UpdateUser", () => {
         let response:any = await update({body:request});
 
         //Get
-        //let getRequest = JSON.stringify(getBody);
         let getResponse:any = await get({pathParameters: getBody});
 
         expect(response.statusCode).toBe(200);
