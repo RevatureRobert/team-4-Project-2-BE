@@ -5,7 +5,7 @@ import { handler as add } from '../AddOne/AddUser';
 describe("UpdateUser", () => {
     beforeEach(async () => {
         let body = {
-            userID: "U_cheeseburger",
+            userID: "cheeseburger",
             REFERENCE: "0",
             image: "burg.jpg",
             bio: "burger time!",
@@ -18,10 +18,10 @@ describe("UpdateUser", () => {
     });
     test("Return Status Code 200", async () => {
         let getBody = {
-            userID: "U_cheeseburger", 
+            userID: "cheeseburger", 
         }
         let updateBody = {
-            userID: "U_cheeseburger",
+            userID: "cheeseburger",
             REFERENCE: "0",
             image: "burg.jpg",
             bio: "burger time!",
@@ -30,7 +30,7 @@ describe("UpdateUser", () => {
             favorites: ["friends"],
         };
         let expectBody = {
-            TYPEID: getBody.userID,
+            TYPEID: "U#" + getBody.userID,
             REFERENCE: "0",
             image: "burg.jpg",
             bio: "burger time!",

@@ -8,12 +8,11 @@ export const handler = async (event: any) => {
   let response = {};
 
   let body = JSON.parse(event.body);
-  let userID = body.userID && body.userID.replace("#", "_");
 
   let params = {
     TableName: TABLE,
     Key: {
-      TYPEID: userID,
+      TYPEID: "U#" + body.userID,
       REFERENCE: "0",
     },
     //image, bio, wishlist[], followed[], favorites

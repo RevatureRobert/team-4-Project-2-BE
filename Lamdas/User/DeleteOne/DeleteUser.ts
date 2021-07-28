@@ -7,13 +7,12 @@ export const handler = async (event: any) => {
   console.log("Request Event: ", event);
   let response = {};
 
-  let body = event.pathParameters;
-  let userID = body.userID && body.userID.replace("#", "_");
-  
+  let body = JSON.parse(event.body);
+
   let params = {
     TableName: TABLE,
     Key: {
-      TYPEID: userID,
+      TYPEID: "U#" + body.userID,
       REFERENCE: "0",
     },
   };

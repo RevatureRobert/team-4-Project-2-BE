@@ -8,8 +8,8 @@ export const handler = async (event: any) => {
   let response = {};
 
   let body = event.pathParameters;
-  let postId = body.postID && body.postID.replace("#", "_");
-  let parentId = body.parentID && body.parentID.replace("#", "_");
+  let postId = body.postID && body.postID.replace("_", "#");
+  let parentId = body.parentID && body.parentID.replace("_", "#");
   console.log("Get Body", body);
   let params = {
     TableName: dynamoDBTableName,
