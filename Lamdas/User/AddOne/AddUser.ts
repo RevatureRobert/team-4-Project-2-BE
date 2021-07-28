@@ -13,11 +13,12 @@ export const handler = async (event: any) => {
   let watchlist = body.watchlist;
   let followed = body.followed;
   let favorites = body.favorites;
+  let userID = body.userID;
 
   let params = {
     TableName: TABLE,
     Item: {
-      TYPEID: "U#" + body.userID,
+      TYPEID: userID,
       REFERENCE,
       image,
       bio,

@@ -2,9 +2,8 @@ import {handler} from './AddUser';
 
 describe("AddUser", () => {
     test("Should return Status Code 200", async () => {
-        let userID = "cheeseburger";
         let body = {
-            TYPEID: "U#"+userID,
+            userID: "U#cheeseburger",
             REFERENCE: "0",
             image: "cheeseburger.jpg",
             bio: "I like anime and fast food",

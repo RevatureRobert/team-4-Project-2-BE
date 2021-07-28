@@ -10,12 +10,13 @@ export const handler = async (event: any) => {
 
   // convert body param in JSON to object
   let body = event.pathParameters;
+  let userID = body.userID && body.userID.replace("_", "#");
   console.log(`Get body: \n`, body);
 
   let params = {
     TableName: TABLE,
     Key: {
-      TYPEID: "U#" + body.userID,
+      TYPEID: userID,
       REFERENCE: "0",
     },
   };
