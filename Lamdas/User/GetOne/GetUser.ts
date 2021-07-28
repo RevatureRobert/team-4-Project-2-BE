@@ -10,17 +10,18 @@ export const handler = async (event: any) => {
 
   // convert body param in JSON to object
   let body = event.pathParameters;
-  console.log(`Get body: \n`, body);
-
+  let userID = body.userID && body.userID.replace("#", "_");
+  console.log(body);
   let params = {
     TableName: TABLE,
     Key: {
-      TYPEID: "U#" + body.userID,
+      TYPEID: userID,
       REFERENCE: "0",
     },
   };
   console.log("Get Params", params);
   let data = await ddbDoc.send(new GetCommand(params));
+  console.log(data);
   response = buildResponse(200, data.Item);
   return response;
 };

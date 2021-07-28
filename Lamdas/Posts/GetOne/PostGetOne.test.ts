@@ -4,8 +4,8 @@ import { handler as getHandler } from "./PostGetOne";
 describe("GetOne", () => {
   beforeEach(async () => {
     let body = {
-      postID: `user1#10`,
-      parentID: `A#DragonBall`,
+      postID: `user1_10`,
+      parentID: `A_DragonBall`,
       Stamp: 25,
       content: `This is the post`,
       image: `no image`,
@@ -20,8 +20,8 @@ describe("GetOne", () => {
       parentID: `A_DragonBall`,
     };
     let expectBody = {
-      REFERENCE: `user1#10`,
-      TYPEID: `A#DragonBall`,
+      REFERENCE: `user1_10`,
+      TYPEID: `A_DragonBall`,
       Stamp: 25,
       content: `This is the post`,
       image: `no image`,

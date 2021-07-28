@@ -13,11 +13,12 @@ export const handler = async (event: any) => {
   let watchlist = body.watchlist;
   let followed = body.followed;
   let favorites = body.favorites;
+  let userID = body.userID;
 
   let params = {
     TableName: TABLE,
     Item: {
-      TYPEID: "U#" + body.userID,
+      TYPEID: userID,
       REFERENCE,
       image,
       bio,
@@ -31,9 +32,8 @@ export const handler = async (event: any) => {
     response = buildResponse(200, "Success");
   } catch (err) {
     response = buildResponse(400, "POST command error");
-    console.log(err);
   }
-  return response;
+  return response; 
 };
 
 function buildResponse(statusCode: number, body: any) {
