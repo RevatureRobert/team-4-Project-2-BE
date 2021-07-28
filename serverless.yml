@@ -246,6 +246,10 @@ functions:
         - "/lambda-entrypoint.sh"
     events:
       - http:
-          path: User
+          path: User/{userID}
           method: delete
           cors: true
+          request:
+            paramaters:
+              paths:
+                userID: true
