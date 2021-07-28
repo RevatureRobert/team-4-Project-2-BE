@@ -165,9 +165,13 @@ functions:
         - "/lambda-entrypoint.sh"
     events:
       - http:
-          path: Anime
+          path: Anime/{parentID}
           method: delete
           cors: true
+          request:
+            paramaters:
+              paths:
+                parentID: true
   AnimeGetBySearch:
     image:
       name: scouterLambdas
