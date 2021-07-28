@@ -12,7 +12,7 @@ export const handler = async (event: any) => {
   let body = event.pathParameters;
   let userID = body.userID && body.userID.replace("_", "#");
   console.log(`Get body: \n`, body);
-
+ //asd
   let params = {
     TableName: TABLE,
     Key: {

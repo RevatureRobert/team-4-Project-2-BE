@@ -12,7 +12,7 @@ export const handler = async (event: any) => {
   let params = {
     TableName: TABLE,
     Key: {
-      TYPEID: "U#" + body.userID,
+      TYPEID: body.userID,
       REFERENCE: "0",
     },
     //image, bio, wishlist[], followed[], favorites

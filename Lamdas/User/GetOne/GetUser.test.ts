@@ -4,7 +4,7 @@ import { handler as add } from '../AddOne/AddUser';
 describe("GetUser", () => {
     beforeEach(async () => {
         let body = {
-            userID: "U_cheeseburger",
+            userID: "U#cheeseburger",
             REFERENCE: "0",
             image: "cheeseburger.jpg",
             bio: "I like anime and fast food",

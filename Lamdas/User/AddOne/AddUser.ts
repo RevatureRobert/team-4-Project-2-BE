@@ -27,15 +27,9 @@ export const handler = async (event: any) => {
       favorites,
     },
   };
-  try {
     await ddbDoc.send(new PutCommand(params));
-    response = buildResponse(200, "Success");
-  } catch (err) {
-    response = buildResponse(400, "POST command error");
-    console.log(err);
-  }
-  return response;
-};
+    return buildResponse(200, "Success");
+  };
 
 function buildResponse(statusCode: number, body: any) {
   return {

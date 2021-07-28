@@ -4,7 +4,7 @@ import { handler as add } from '../AddOne/AddUser';
 describe("Delete User", () => {
     beforeEach(async () => {
         let body = {
-            userID: "cheeseburger",
+            userID: "U#cheeseburger",
             REFERENCE: "0",
             image: "cheeseburger.jpg",
             bio: "I like anime and fast food",
@@ -17,11 +17,10 @@ describe("Delete User", () => {
     });
     test("Returned Status Code 200", async () => {
         let body = {
-            TYPEID: "U#cheeseburger",
+            userID: "U_cheeseburger",
         };
 
-        const request = JSON.stringify(body);
-        const response:any = await deleteHandler({body:request});
+        const response:any = await deleteHandler({pathParameters: body});
         expect(response.statusCode).toBe(200);
     })
 })
