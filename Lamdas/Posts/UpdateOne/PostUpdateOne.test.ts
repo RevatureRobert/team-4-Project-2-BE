@@ -5,8 +5,8 @@ import { handler as getHandler } from "../GetOne/PostGetOne";
 describe("updateOne", () => {
   beforeEach(async () => {
     let body = {
-      postID: `user1#10`,
-      parentID: `A#DragonBall`,
+      postID: `user1_10`,
+      parentID: `A_DragonBall`,
       Stamp: 25,
       content: `This is the post`,
       image: `no image`,
@@ -17,8 +17,8 @@ describe("updateOne", () => {
   });
   test("Should return status 200", async () => {
     let updateBody = {
-      postID: `user1#10`,
-      parentID: `A#DragonBall`,
+      postID: `user1_10`,
+      parentID: `A_DragonBall`,
       Stamp: 25,
       content: `This is not the post`,
       image: `no image`,
@@ -28,8 +28,8 @@ describe("updateOne", () => {
       parentID: `A#DragonBall`,
     };
     let expectBody = {
-      REFERENCE: `user1#10`,
-      TYPEID: `A#DragonBall`,
+      REFERENCE: `user1_10`,
+      TYPEID: `A_DragonBall`,
       Stamp: 25,
       content: `This is not the post`,
       image: `no image`,
