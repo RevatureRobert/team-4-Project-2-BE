@@ -7,14 +7,15 @@ export const handler = async (event: any) => {
   console.log("Request event: ", event);
   let response = {};
   let body = event.pathParameters;
-  let search = body.searchValue && body.searchValue.replace("_", "#");
+  let search = body.searchValue;
   const params = {
     // Specify which items in the results are returned.
-    FilterExpression: "contains(TYPEID,:search) AND #ref =:ref",
+    FilterExpression: "contains(TYPEID,:search) AND #ref =:ref AND begins_with(TYPEID, :type)",
     // Define the expression attribute value, which are substitutes for the values you want to compare.
     ExpressionAttributeValues: {
       ":ref": "0",
       ":search": search,
+      ":type": 'A#'
     },
     ExpressionAttributeNames: {
       "#ref": "REFERENCE",
