@@ -47,7 +47,7 @@ describe("GetAnimeBySearch", () => {
     test("Should return status 200 and all searched anime", async () => {
         const body = {
           
-          searchValue:"A#D",
+          searchValue:"d",
         }
         const expected = [
           {

@@ -10,11 +10,11 @@ export const handler = async (event: any) => {
   let search = body.searchValue && body.searchValue.replace("_", "#");
   const params = {
     // Specify which items in the results are returned.
-    FilterExpression: "contains(TYPEID,:search) AND #ref =:ref",
+    FilterExpression: "contains(TYPEID,:atag) AND #ref =:ref",
     // Define the expression attribute value, which are substitutes for the values you want to compare.
     ExpressionAttributeValues: {
       ":ref": "0",
-      ":search": search,
+      ":atag": "A#",
     },
     ExpressionAttributeNames: {
       "#ref": "REFERENCE",
@@ -25,9 +25,11 @@ export const handler = async (event: any) => {
   };
   try {
     const data = await ddbDoc.send(new ScanCommand(params));
-    console.log(data.Items);
-    response = buildResponse(200, data.Items);
+    const fData = data.Items.filter(item => item.TYPEID && item.TYPEID.toLowerCase().includes(search.toLowerCase()));
+    console.log(fData);
+    response = buildResponse(200, fData);
   } catch (err) {
+
     response = buildResponse(400, "error with command");
     console.log(err);
   }
