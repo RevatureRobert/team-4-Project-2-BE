@@ -12,14 +12,14 @@ export const handler = async (event: any) => {
   let pageId = body.pageID && body.pageID.replace("_", "#");
   let params = {
     TableName: dynamoDBTableName,
-    FilterExpression: `#typ = :id AND NOT #ref = :z`,
+    FilterExpression: `#typ = :id AND (NOT #ref = :z)`,
     ExpressionAttributeNames: {
       "#typ": "TYPEID",
       "#ref": "REFERENCE",
     },
     ExpressionAttributeValues: {
       ":id": pageId,
-      ":z": 0,
+      ":z": "0",
     },
   };
   console.log("Params", params);
