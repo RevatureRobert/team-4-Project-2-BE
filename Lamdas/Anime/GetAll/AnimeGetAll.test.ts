@@ -8,6 +8,7 @@ describe("GetAllPage", () => {
       parentID: `A#DragonBall`,      
       bio: `This is the post`,
       image: `no image`,
+      genre: 'genre',
     };
     let addRequest = JSON.stringify(body1);
 
@@ -18,6 +19,7 @@ describe("GetAllPage", () => {
       parentID: `A#Pokemon`,      
       bio: `This is the post`,
       image: `no image`,
+      genre: 'a genre',
     };
     addRequest = JSON.stringify(body2);
 
@@ -28,6 +30,7 @@ describe("GetAllPage", () => {
       parentID: `A#DemonSlayer`,      
       bio: `This is the post`,
       image: `no image`,
+      genre: 'the genre',
     };
     addRequest = JSON.stringify(body3);
 
@@ -38,6 +41,7 @@ describe("GetAllPage", () => {
       parentID: `A#OnePiece`,      
       bio: `This is the post`,
       image: `no image`,
+      genre: 'these genres'
     };
     addRequest = JSON.stringify(body4);
 
@@ -56,24 +60,28 @@ describe("GetAllPage", () => {
         TYPEID: `A#DragonBall`,       
         bio: `This is the post`,
         image: `no image`,
+        genre: 'genre'
       },
       {
         REFERENCE: `0`,
         TYPEID: `A#Pokemon`,       
         bio: `This is the post`,
         image: `no image`,
+        genre: 'a genre'
       },
       {
         REFERENCE: `0`,
         TYPEID: `A#DemonSlayer`,       
         bio: `This is the post`,
         image: `no image`,
+        genre: 'the genre',
       },
       {
         REFERENCE: `0`,
         TYPEID: `A#OnePiece`,       
         bio: `This is the post`,
         image: `no image`,
+        genre: 'these genres'
       },
     ];
 
