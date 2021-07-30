@@ -17,6 +17,7 @@ describe("GetAllPage", () => {
       parentID: `A#DragonBall`,
       bio: `This is anime`,
       image: `no image`,
+      genre: 'anything',
     };
     let request = JSON.stringify(body);
     console.log(request);
