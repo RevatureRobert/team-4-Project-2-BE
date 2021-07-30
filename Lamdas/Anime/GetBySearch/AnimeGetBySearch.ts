@@ -25,7 +25,7 @@ export const handler = async (event: any) => {
   };
   try {
     const data = await ddbDoc.send(new ScanCommand(params));
-    const fData = data.Items.filter(item => item.TYPEID && item.TYPEID.toLowerCase().includes(search.toLowerCase()));
+    const fData = data.Items.filter(item => item.TYPEID && item.TYPEID.substring(2).toLowerCase().includes(search.toLowerCase()));
     console.log(fData);
     response = buildResponse(200, fData);
   } catch (err) {

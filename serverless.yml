@@ -148,7 +148,7 @@ functions:
     image:
       name: scouterLambdas
       command:
-        - "./Lamdas/Anime/UpdateOne/AnimeUpdateOne.handler"
+        - "./Lamdas/Anime/UpdateOne/AnimeUpdate.handler"
       entryPoint:
         - "/lambda-entrypoint.sh"
     events:
