@@ -1,6 +1,6 @@
 import { handler as addHandler } from "../AddOne/PostAddOne";
 import { handler as getPageHandler } from "./PostGetAllPage";
-
+import { handler } from "../../Anime/AddOne/AnimeAddOne";
 describe("GetAllPage", () => {
   beforeEach(async () => {
     let body1 = {
@@ -13,6 +13,14 @@ describe("GetAllPage", () => {
     let addRequest = JSON.stringify(body1);
 
     await addHandler({ body: addRequest });
+    let body = {
+      parentID: `A#DragonBall`,
+      bio: `This is anime`,
+      image: `no image`,
+    };
+    let request = JSON.stringify(body);
+    console.log(request);
+    await handler({ body: request });
 
     let body2 = {
       postID: `user2#10`,
