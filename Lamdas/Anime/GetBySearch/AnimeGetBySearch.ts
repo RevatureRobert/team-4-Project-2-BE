@@ -29,7 +29,6 @@ export const handler = async (event: any) => {
     console.log(fData);
     response = buildResponse(200, fData);
   } catch (err) {
-
     response = buildResponse(400, "error with command");
     console.log(err);
   }

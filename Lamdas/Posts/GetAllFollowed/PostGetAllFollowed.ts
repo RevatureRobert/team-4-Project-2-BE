@@ -19,7 +19,8 @@ export const handler = async (event: any) => {
   });
 
   filterString = filterString.substring(0, filterString.length - 4);
-
+  filterString = filterString + " AND NOT begins_with(#ref, :rtag)";
+  expressionValue[`:rtag`] = "R#";
   let params = {
     TableName: dynamoDBTableName,
     FilterExpression: filterString,
