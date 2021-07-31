@@ -12,7 +12,7 @@ export const handler = async (event: any) => {
   let parentId = body.parentID;
   let rating = body.rating;
   if(!(rating === 1 || rating === 2 || rating === 3 || rating === 4 || rating === 5)){
-    response = buildResponse(400, "please input a valid rating");
+    response = buildResponse(400, "error with command");
     return response;
   } 
 
@@ -24,13 +24,10 @@ export const handler = async (event: any) => {
       Rating: rating
     },
   };
-  try {
+
     await ddbDoc.send(new PutCommand(params));
     response = buildResponse(200, "Success");
-  } catch (err) {
-    response = buildResponse(400, "error with command");
-    console.log(err);
-  }
+
 
   return response;
 };

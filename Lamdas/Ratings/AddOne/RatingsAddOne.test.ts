@@ -25,4 +25,5 @@ describe("RatingsAddOne", () => {
 
     expect(response.statusCode).toBe(400);
   });
+  
 });
