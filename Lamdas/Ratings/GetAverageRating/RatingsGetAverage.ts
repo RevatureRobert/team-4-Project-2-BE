@@ -8,7 +8,7 @@ export const handler = async (event: any) => {
   
   let response = {};
   try {
-  let body = JSON.parse(event.body);
+  let body = event.pathParameters;
 
   let pageId = body.pageID && body.pageID.replace("_", "#");
   let params = {

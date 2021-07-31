@@ -65,7 +65,7 @@ describe("RatingsGetAverage", () => {
       pageID: `A#DragonBall`
     };
     let request = JSON.stringify(body);
-    let response: any = await handler({ body: request });
+    let response: any = await handler({ pathParameters: body });
     let responseBody = JSON.parse(response.body);
     expect(responseBody).toStrictEqual((2+2+5)/3);
   });
