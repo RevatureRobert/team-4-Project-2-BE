@@ -282,6 +282,6 @@ functions:
         - "/lambda-entrypoint.sh"
     events:
       - http:
-          path: Rating
+          path: Ratings
           method: put
           cors: true
