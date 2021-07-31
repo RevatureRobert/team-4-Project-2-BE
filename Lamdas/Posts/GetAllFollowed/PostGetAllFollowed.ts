@@ -14,8 +14,9 @@ export const handler = async (event: any) => {
   let postIds: any[] = body.followArray;
   let expressionValue: Object = {};
   postIds.forEach((user) => {
+    
     filterString += `contains(#ref, :${user}) OR `;
-    expressionValue[`:${user}`] = user;
+    expressionValue[`:${user}`] = user + "#";
   });
 
   filterString = filterString.substring(0, filterString.length - 4);
