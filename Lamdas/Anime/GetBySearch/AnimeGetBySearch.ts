@@ -10,22 +10,28 @@ export const handler = async (event: any) => {
   let search = body.searchValue;
   const params = {
     // Specify which items in the results are returned.
-    FilterExpression: "contains(TYPEID,:atag) AND #ref =:ref",
+    FilterExpression:
+      "(begins_with(TYPEID,:atag) OR begins_with(TYPEID, :utag)) AND #ref =:ref",
     // Define the expression attribute value, which are substitutes for the values you want to compare.
     ExpressionAttributeValues: {
       ":ref": "0",
       ":atag": "A#",
+      ":utag": "U#",
     },
     ExpressionAttributeNames: {
       "#ref": "REFERENCE",
     },
     // Set the projection expression, which are the attributes that you want.
-    ProjectionExpression: " TYPEID",
+    ProjectionExpression: " TYPEID, image",
     TableName: dynamoDBTableName,
   };
   try {
     const data = await ddbDoc.send(new ScanCommand(params));
-    const fData = data.Items.filter(item => item.TYPEID && item.TYPEID.substring(2).toLowerCase().includes(search.toLowerCase()));
+    const fData = data.Items.filter(
+      (item) =>
+        item.TYPEID &&
+        item.TYPEID.substring(2).toLowerCase().includes(search.toLowerCase())
+    );
     console.log(fData);
     response = buildResponse(200, fData);
   } catch (err) {
