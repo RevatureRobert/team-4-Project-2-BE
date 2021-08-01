@@ -8,7 +8,7 @@ describe("GetAnimeBySearch", () => {
       parentID: `A#DragonBall`,
       bio: `This is the post`,
       image: `no image`,
-      genre: 'action'
+      genre: "action",
     };
     let addRequest = JSON.stringify(body1);
 
@@ -19,7 +19,7 @@ describe("GetAnimeBySearch", () => {
       parentID: `A#DemonSlayer`,
       bio: `This is the post`,
       image: `no image`,
-      genre: 'adventure',
+      genre: "adventure",
     };
     addRequest = JSON.stringify(body2);
 
@@ -30,7 +30,7 @@ describe("GetAnimeBySearch", () => {
       parentID: `A#Pokemon`,
       bio: `This is the post`,
       image: `no image`,
-      genre: 'romance',
+      genre: "romance",
     };
     addRequest = JSON.stringify(body3);
 
@@ -41,7 +41,7 @@ describe("GetAnimeBySearch", () => {
       parentID: `A#OnePiece`,
       bio: `This is the post`,
       image: `no image`,
-      genre: 'open world',
+      genre: "open world",
     };
     addRequest = JSON.stringify(body4);
 
@@ -55,9 +55,11 @@ describe("GetAnimeBySearch", () => {
     const expected = [
       {
         TYPEID: `A#DragonBall`,
+        image: `no image`,
       },
       {
         TYPEID: `A#DemonSlayer`,
+        image: `no image`,
       },
     ];
 
