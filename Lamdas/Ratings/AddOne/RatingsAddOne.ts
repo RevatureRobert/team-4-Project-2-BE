@@ -1,4 +1,4 @@
-import { ScanCommand } from "@aws-sdk/lib-dynamodb";
+import { PutCommand } from "@aws-sdk/lib-dynamodb";
 import { ddbDoc } from "../../../DB/Dynamo";
 
 const dynamoDBTableName = "ScouterApp";
@@ -7,30 +7,27 @@ export const handler = async (event: any) => {
   console.log("Request event: ", event);
   let response = {};
 
-  let body = event.pathParameters;
+  let body = JSON.parse(event.body);
+  let postId = body.postID;
+  let parentId = body.parentID;
+  let rating = body.rating;
+  if(!(rating === 1 || rating === 2 || rating === 3 || rating === 4 || rating === 5)){
+    response = buildResponse(400, "error with command");
+    return response;
+  } 
 
-  let pageId = body.pageID && body.pageID.replace("_", "#");
   let params = {
     TableName: dynamoDBTableName,
-    FilterExpression: `#typ = :id AND (NOT #ref = :z) AND (NOT begins_with(#ref,:r))`,
-    ExpressionAttributeNames: {
-      "#typ": "TYPEID",
-      "#ref": "REFERENCE",
-    },
-    ExpressionAttributeValues: {
-      ":id": pageId,
-      ":z": "0",
-      ":r": "R#"
+    Item: {
+      TYPEID: parentId,
+      REFERENCE: postId,
+      Rating: rating
     },
   };
-  console.log("Params", params);
-  try {
-    let data = await ddbDoc.send(new ScanCommand(params));
-    response = buildResponse(200, data.Items);
-  } catch (err) {
-    response = buildResponse(400, "error with command");
-    console.log(err);
-  }
+
+    await ddbDoc.send(new PutCommand(params));
+    response = buildResponse(200, "Success");
+
 
   return response;
 };

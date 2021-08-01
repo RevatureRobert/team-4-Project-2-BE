@@ -7,7 +7,8 @@ describe("Post Delete One", () => {
       REFERENCE: `0`,
       parentID: `A#DragonBall`,
       bio: 'something',
-      image: 'literally anything.jpeg'
+      image: 'literally anything.jpeg',
+      genre: 'action',
     };
     let addRequest = JSON.stringify(body);
 

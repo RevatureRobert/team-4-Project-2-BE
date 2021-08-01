@@ -11,6 +11,7 @@ export const handler = async (event: any) => {
   let parentId = body.parentID;
   let bio = body.bio;
   let image = body.image;
+  let genre = body.genre;
 
   let params = {
     TableName: dynamoDBTableName,
@@ -19,6 +20,7 @@ export const handler = async (event: any) => {
       TYPEID: parentId,
       bio,
       image,
+      genre,
     },
   };
   await ddbDoc.send(new PutCommand(params));

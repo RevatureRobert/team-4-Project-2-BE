@@ -5,28 +5,31 @@ const dynamoDBTableName = "ScouterApp";
 
 export const handler = async (event: any) => {
   console.log("Request event: ", event);
+  
   let response = {};
-
+  try {
   let body = event.pathParameters;
 
   let pageId = body.pageID && body.pageID.replace("_", "#");
   let params = {
     TableName: dynamoDBTableName,
-    FilterExpression: `#typ = :id AND (NOT #ref = :z) AND (NOT begins_with(#ref,:r))`,
+    FilterExpression: `#typ = :id AND begins_with(#ref,:r)`,
     ExpressionAttributeNames: {
       "#typ": "TYPEID",
       "#ref": "REFERENCE",
     },
     ExpressionAttributeValues: {
       ":id": pageId,
-      ":z": "0",
       ":r": "R#"
     },
   };
-  console.log("Params", params);
-  try {
+
+
     let data = await ddbDoc.send(new ScanCommand(params));
-    response = buildResponse(200, data.Items);
+    console.log("Items ", data.Items);
+    const average = data.Items.reduce((total, next) => total + next.Rating, 0) / data.Items.length;
+    console.log(average);
+    response = buildResponse(200, average);
   } catch (err) {
     response = buildResponse(400, "error with command");
     console.log(err);

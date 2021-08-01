@@ -5,6 +5,7 @@ describe("AnimeAddOne", () => {
       parentID: `A#DragonBall`,     
       bio: `This is anime`,
       image: `no image`,
+      genre: 'martial arts',
     };
     let request = JSON.stringify(body);
     console.log(request);
@@ -18,6 +19,7 @@ describe("AnimeAddOne", () => {
       parentID: undefined,     
       bio: `This is t e post`,
       image: `no image`,
+      genre: 'anything honestly',
     };
     let request = JSON.stringify(body);
     console.log(request);

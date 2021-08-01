@@ -6,6 +6,7 @@ describe("AnimeAddOne", () => {
       parentID: `A#DragonBall`,      
       bio: `This is anime`,
       image: `no image`,
+      genre: "Adventure, Action",
     };
     let request = JSON.stringify(body);
     console.log(request);

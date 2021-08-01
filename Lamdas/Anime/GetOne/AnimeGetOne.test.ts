@@ -7,6 +7,7 @@ describe("AnimeGetOne", () => {
       parentID: `A#DragonBall`,     
       bio: `This is the post`,
       image: `no image`,
+      genre: 'martial arts',
     };
     let addRequest = JSON.stringify(body);
 
@@ -21,6 +22,7 @@ describe("AnimeGetOne", () => {
       TYPEID: `A#DragonBall`,      
       bio: `This is the post`,
       image: `no image`,
+      genre: 'martial arts',
     };
     let getResponse: any = await getHandler({ pathParameters: getBody });
     expect(getResponse.statusCode).toBe(200);
